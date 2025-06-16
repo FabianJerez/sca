@@ -1,0 +1,90 @@
+.btn-registrarse {
+    display: inline-block;
+    background-color: #00b7b5;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 10px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-registrarse:hover {
+    background-color: #009c9a;
+}
+
+.login-section {
+    background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 30rem;
+    text-align: center;
+    margin: auto;
+  }
+  
+  .login-section h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .contact-section p {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0;
+  }
+  
+  .contact-section a {
+    color: #00aaff;
+    text-decoration: none;
+  }
+  
+  .contact-section a:hover {
+    text-decoration: underline;
+  }
+  
+  .login-form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login-form label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .login-form input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ff3333;
+      border-radius: 4px;
+      font-size: 14px;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+  }
+  
+  .login-form input:focus {
+      border-color: #e62e2e;
+      outline: none;
+  }
+  
+  .login-form button {
+    background-color: #ff3333;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .login-form button:hover {
+    background-color: #e62e2e;
+  }

@@ -1,0 +1,152 @@
+[15-Jun-2025 05:02:39 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 11
+[15-Jun-2025 05:02:39 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 11
+[15-Jun-2025 05:02:39 UTC] PHP Warning:  Undefined variable $base in /home/scasoftw/public_html/paneles/panel_usuario.php on line 17
+[15-Jun-2025 05:02:39 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/scasoftw/public_html/paneles/panel_usuario.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/scasoftw/public_html/paneles/panel_usuario.php on line 17
+[15-Jun-2025 05:04:03 UTC] PHP Warning:  include(../conection/conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 11
+[15-Jun-2025 05:04:03 UTC] PHP Warning:  include(): Failed opening '../conection/conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 11
+[15-Jun-2025 05:04:03 UTC] PHP Warning:  Undefined variable $base in /home/scasoftw/public_html/paneles/panel_usuario.php on line 17
+[15-Jun-2025 05:04:03 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/scasoftw/public_html/paneles/panel_usuario.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/scasoftw/public_html/paneles/panel_usuario.php on line 17
+[15-Jun-2025 05:04:06 UTC] PHP Warning:  include(../conection/conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 11
+[15-Jun-2025 05:04:06 UTC] PHP Warning:  include(): Failed opening '../conection/conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 11
+[15-Jun-2025 05:04:06 UTC] PHP Warning:  Undefined variable $base in /home/scasoftw/public_html/paneles/panel_usuario.php on line 17
+[15-Jun-2025 05:04:06 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/scasoftw/public_html/paneles/panel_usuario.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/scasoftw/public_html/paneles/panel_usuario.php on line 17
+[15-Jun-2025 05:04:11 UTC] PHP Warning:  include(../conection/conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 11
+[15-Jun-2025 05:04:11 UTC] PHP Warning:  include(): Failed opening '../conection/conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 11
+[15-Jun-2025 05:04:11 UTC] PHP Warning:  Undefined variable $base in /home/scasoftw/public_html/paneles/panel_usuario.php on line 17
+[15-Jun-2025 05:04:11 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/scasoftw/public_html/paneles/panel_usuario.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/scasoftw/public_html/paneles/panel_usuario.php on line 17
+[15-Jun-2025 05:04:39 UTC] PHP Warning:  include(../conection/conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 11
+[15-Jun-2025 05:04:39 UTC] PHP Warning:  include(): Failed opening '../conection/conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 11
+[15-Jun-2025 05:04:39 UTC] PHP Warning:  Undefined variable $base in /home/scasoftw/public_html/paneles/panel_usuario.php on line 17
+[15-Jun-2025 05:04:39 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/scasoftw/public_html/paneles/panel_usuario.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/scasoftw/public_html/paneles/panel_usuario.php on line 17
+[15-Jun-2025 05:05:30 UTC] PHP Warning:  include(conection/conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 11
+[15-Jun-2025 05:05:30 UTC] PHP Warning:  include(): Failed opening 'conection/conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 11
+[15-Jun-2025 05:05:30 UTC] PHP Warning:  Undefined variable $base in /home/scasoftw/public_html/paneles/panel_usuario.php on line 17
+[15-Jun-2025 05:05:30 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/scasoftw/public_html/paneles/panel_usuario.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/scasoftw/public_html/paneles/panel_usuario.php on line 17
+[15-Jun-2025 05:05:37 UTC] PHP Warning:  include(conection/conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 11
+[15-Jun-2025 05:05:37 UTC] PHP Warning:  include(): Failed opening 'conection/conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 11
+[15-Jun-2025 05:05:37 UTC] PHP Warning:  Undefined variable $base in /home/scasoftw/public_html/paneles/panel_usuario.php on line 17
+[15-Jun-2025 05:05:37 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/scasoftw/public_html/paneles/panel_usuario.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/scasoftw/public_html/paneles/panel_usuario.php on line 17
+[15-Jun-2025 05:06:14 UTC] PHP Warning:  include(/conection/conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 11
+[15-Jun-2025 05:06:14 UTC] PHP Warning:  include(): Failed opening '/conection/conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 11
+[15-Jun-2025 05:06:14 UTC] PHP Warning:  Undefined variable $base in /home/scasoftw/public_html/paneles/panel_usuario.php on line 17
+[15-Jun-2025 05:06:14 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/scasoftw/public_html/paneles/panel_usuario.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/scasoftw/public_html/paneles/panel_usuario.php on line 17
+[15-Jun-2025 05:06:45 UTC] PHP Warning:  include(/conection/conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 11
+[15-Jun-2025 05:06:45 UTC] PHP Warning:  include(): Failed opening '/conection/conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 11
+[15-Jun-2025 05:06:45 UTC] PHP Warning:  Undefined variable $base in /home/scasoftw/public_html/paneles/panel_usuario.php on line 17
+[15-Jun-2025 05:06:45 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/scasoftw/public_html/paneles/panel_usuario.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/scasoftw/public_html/paneles/panel_usuario.php on line 17
+[15-Jun-2025 05:07:26 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 138
+[15-Jun-2025 05:07:26 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 138
+[15-Jun-2025 05:07:56 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 138
+[15-Jun-2025 05:07:56 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 138
+[15-Jun-2025 05:08:44 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 138
+[15-Jun-2025 05:08:44 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 138
+[15-Jun-2025 05:12:25 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 138
+[15-Jun-2025 05:12:25 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 138
+[15-Jun-2025 05:12:36 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 138
+[15-Jun-2025 05:12:36 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 138
+[15-Jun-2025 05:31:28 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 138
+[15-Jun-2025 05:31:28 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 138
+[15-Jun-2025 05:31:48 UTC] PHP Warning:  Undefined variable $usuario in /home/scasoftw/public_html/paneles/panel_admin.php on line 116
+[15-Jun-2025 05:31:48 UTC] PHP Warning:  Undefined variable $descripcion in /home/scasoftw/public_html/paneles/panel_admin.php on line 116
+[15-Jun-2025 05:31:48 UTC] PHP Warning:  Undefined variable $chipid in /home/scasoftw/public_html/paneles/panel_admin.php on line 116
+[15-Jun-2025 05:31:48 UTC] PHP Warning:  Undefined variable $encriptacion in /home/scasoftw/public_html/paneles/panel_admin.php on line 116
+[15-Jun-2025 05:31:48 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'usuario' cannot be null in /home/scasoftw/public_html/paneles/panel_admin.php:116
+Stack trace:
+#0 /home/scasoftw/public_html/paneles/panel_admin.php(116): PDOStatement->execute(Array)
+#1 {main}
+  thrown in /home/scasoftw/public_html/paneles/panel_admin.php on line 116
+[15-Jun-2025 05:52:59 UTC] PHP Warning:  Undefined variable $usuario in /home/scasoftw/public_html/paneles/panel_admin.php on line 116
+[15-Jun-2025 05:52:59 UTC] PHP Warning:  Undefined variable $descripcion in /home/scasoftw/public_html/paneles/panel_admin.php on line 116
+[15-Jun-2025 05:52:59 UTC] PHP Warning:  Undefined variable $chipid in /home/scasoftw/public_html/paneles/panel_admin.php on line 116
+[15-Jun-2025 05:52:59 UTC] PHP Warning:  Undefined variable $encriptacion in /home/scasoftw/public_html/paneles/panel_admin.php on line 116
+[15-Jun-2025 05:52:59 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'usuario' cannot be null in /home/scasoftw/public_html/paneles/panel_admin.php:116
+Stack trace:
+#0 /home/scasoftw/public_html/paneles/panel_admin.php(116): PDOStatement->execute(Array)
+#1 {main}
+  thrown in /home/scasoftw/public_html/paneles/panel_admin.php on line 116
+[15-Jun-2025 06:02:36 UTC] PHP Warning:  Undefined variable $usuario_id in /home/scasoftw/public_html/paneles/panel_usuario.php on line 39
+[15-Jun-2025 06:02:36 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 134
+[15-Jun-2025 06:02:36 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 134
+[15-Jun-2025 06:06:28 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 134
+[15-Jun-2025 06:06:28 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 134
+[15-Jun-2025 06:10:25 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 134
+[15-Jun-2025 06:10:25 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 134
+[15-Jun-2025 06:13:50 UTC] PHP Warning:  Undefined variable $usuario in /home/scasoftw/public_html/paneles/panel_admin.php on line 112
+[15-Jun-2025 06:13:50 UTC] PHP Warning:  Undefined variable $descripcion in /home/scasoftw/public_html/paneles/panel_admin.php on line 112
+[15-Jun-2025 06:13:50 UTC] PHP Warning:  Undefined variable $chipid in /home/scasoftw/public_html/paneles/panel_admin.php on line 112
+[15-Jun-2025 06:13:50 UTC] PHP Warning:  Undefined variable $encriptacion in /home/scasoftw/public_html/paneles/panel_admin.php on line 112
+[15-Jun-2025 06:13:50 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'usuario' cannot be null in /home/scasoftw/public_html/paneles/panel_admin.php:112
+Stack trace:
+#0 /home/scasoftw/public_html/paneles/panel_admin.php(112): PDOStatement->execute(Array)
+#1 {main}
+  thrown in /home/scasoftw/public_html/paneles/panel_admin.php on line 112
+[15-Jun-2025 06:29:31 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:29:31 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:31:47 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:31:47 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:31:52 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:31:52 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:32:44 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:32:44 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:33:32 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:33:32 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:34:52 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:34:52 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:34:57 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:34:57 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:35:08 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:35:08 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:36:45 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:36:45 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:37:02 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:37:02 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:37:20 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:37:20 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:48:32 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:48:32 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:49:26 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:49:26 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:49:31 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:49:31 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:51:14 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:51:14 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 132
+[15-Jun-2025 06:52:56 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 117
+[15-Jun-2025 06:52:56 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 117
+[15-Jun-2025 06:53:54 UTC] PHP Warning:  include(conexion.php): Failed to open stream: No such file or directory in /home/scasoftw/public_html/paneles/panel_usuario.php on line 117
+[15-Jun-2025 06:53:54 UTC] PHP Warning:  include(): Failed opening 'conexion.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/scasoftw/public_html/paneles/panel_usuario.php on line 117
+[15-Jun-2025 07:09:52 UTC] PHP Warning:  Undefined variable $usuario in /home/scasoftw/public_html/paneles/panel_admin.php on line 112
+[15-Jun-2025 07:09:52 UTC] PHP Warning:  Undefined variable $descripcion in /home/scasoftw/public_html/paneles/panel_admin.php on line 112
+[15-Jun-2025 07:09:52 UTC] PHP Warning:  Undefined variable $chipid in /home/scasoftw/public_html/paneles/panel_admin.php on line 112
+[15-Jun-2025 07:09:52 UTC] PHP Warning:  Undefined variable $encriptacion in /home/scasoftw/public_html/paneles/panel_admin.php on line 112
+[15-Jun-2025 07:09:52 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'usuario' cannot be null in /home/scasoftw/public_html/paneles/panel_admin.php:112
+Stack trace:
+#0 /home/scasoftw/public_html/paneles/panel_admin.php(112): PDOStatement->execute(Array)
+#1 {main}
+  thrown in /home/scasoftw/public_html/paneles/panel_admin.php on line 112
