@@ -1,4 +1,4 @@
-#Confección de un sitio web, el mismo debe tener las siguientes estructuras:
+# Confección de un sitio web, el mismo debe tener las siguientes estructuras:
 1. Dentro del inicio, la barra de navegación, un contenedor principal, al menos un espacio especial (section o article), al menos una barra lateral, pie de página con las etiquetas HTML vistas. (0.50 puntos)
 2. Inicio y cierre de sesión la contraseña, la cual debe guardarse en la base de datos de manera encriptada, así mismo poder ingresar nuevamente con la misma clave. (0.50 puntos)
 3. Requisito mínimo una vez logueado, poder realizar varios CRUD todos los módulos deben estar desarrollados con la lógica en lenguaje PHP, (2 puntos) más módulos desarrollados suma puntos. (+2 puntos)
