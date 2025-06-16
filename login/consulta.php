@@ -1,5 +1,11 @@
 <?php
-session_start();
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 require_once __DIR__ . '/../config.php';
 require_once __DIR__ . '/../includes/db.php';
 
@@ -20,22 +26,21 @@ try {
         $_SESSION["rol"] = $fila["rol"];
         $_SESSION["email"] = $fila["email"];
 
+        // Redirección segura
         $destino = BASE_URL . "panel.php";
-
-        // Validación básica del redirect
-        if (!empty($redirect) && str_starts_with($redirect, "panel.php")) {
-            $destino = BASE_URL . $redirect;
+        if (!empty($redirect) && !preg_match('/^https?:\/\//', $redirect)) {
+            $destino = BASE_URL . ltrim($redirect, '/');
         }
 
         header("Location: $destino");
         exit();
     } else {
-        header("Location: login.php?error=1");
+        header("Location: " . BASE_URL . "login/login.php?error=1");
         exit();
     }
 } catch (PDOException $e) {
-    // En producción, se puede loggear el error en un archivo
     error_log("Error login: " . $e->getMessage());
-    header("Location: login.php?error=1");
+    header("Location: " . BASE_URL . "login/login.php?error=1");
     exit();
 }
+?>

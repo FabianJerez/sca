@@ -1,7 +1,16 @@
 <?php
-session_start();
-$redirect = $_GET["redirect"] ?? '';
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+require_once __DIR__ . '/../config.php';
+
+$redirect = $_POST["redirect"] ?? $_GET["redirect"] ?? '';
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -40,3 +49,4 @@ $redirect = $_GET["redirect"] ?? '';
     <?php include '../footer.php'; ?>
 </body>
 </html>
+

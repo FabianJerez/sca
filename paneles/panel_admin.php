@@ -1,189 +1,118 @@
 <?php
-    session_start();
-    // Verificar si el usuario está autenticado
-    if (!isset($_SESSION["usuario_id"])) {
-        header("Location: ../login/login.php");
-        exit();
-    }
+session_start();
+require_once __DIR__ . '/../includes/db.php';
 
-    include("../conection/conexion.php");
+if (!isset($_SESSION["usuario_id"]) || $_SESSION["rol"] !== "admin") {
+    header("Location: ../login/login.php");
+    exit();
+}
 
-    $sql = "SELECT * FROM datos_recibe ORDER BY fecha DESC LIMIT 3";
-    $resultado = $base->prepare($sql);
-    $resultado->execute(array());
-    
-    foreach($resultado as $fila):
-        $temperatura = $fila['temperatura']; 
-        $humedad = $fila['humedad'];
-    endforeach;  
+// Últimos datos del sensor
+$sql = "SELECT * FROM datos_recibe ORDER BY fecha DESC LIMIT 3";
+$stmt = $base->prepare($sql);
+$stmt->execute();
+$datos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$temperatura = $datos[0]['temperatura'] ?? 0;
+$humedad = $datos[0]['humedad'] ?? 0;
+
+// Lista de usuarios
+$sqlUsuarios = "SELECT id, usuario, email, rol, estado, fecha_inicio FROM usuarios";
+$stmtUsuarios = $base->prepare($sqlUsuarios);
+$stmtUsuarios->execute();
+$usuarios = $stmtUsuarios->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloud IOT USUARIO</title>
+    <title>Panel Admin</title>
     <link rel="stylesheet" href="../css/headerfooter.css">
-    <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/panel.css">
 </head>
 <body>
-    <?php 
-    include 'headerpanel.php'; 
+    <?php include 'headerpanel.php'; ?>
+
+    <h1>Panel del Administrador</h1>
+    <p>Bienvenido, <strong><?= htmlspecialchars($_SESSION["usuario_nombre"]) ?></strong></p>
+
+    <section>
+        <h2>Últimos datos del sensor</h2>
+        <p>Temperatura actual: <strong><?= $temperatura ?> °C</strong></p>
+        <p>Humedad actual: <strong><?= $humedad ?> %</strong></p>
+    </section>
+
+    <section>
+        <h2>Gestión de usuarios</h2>
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>ID</th>
+                <th>Usuario</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Estado</th>
+                <th>Fecha Inicio</th>
+                <th>Acción</th>
+            </tr>
+            <?php foreach ($usuarios as $u): ?>
+            <tr>
+                <td><?= $u['id'] ?></td>
+                <td><?= htmlspecialchars($u['usuario']) ?></td>
+                <td><?= htmlspecialchars($u['email']) ?></td>
+                <td><?= $u['rol'] ?></td>
+                <td><?= $u['estado'] == 1 ? 'Activo' : 'Inactivo' ?></td>
+                <td><?= $u['fecha_inicio'] ?></td>
+                <td>
+                    <form action="cambiar_rol.php" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="<?= $u['id'] ?>">
+                        <input type="hidden" name="rol_actual" value="<?= $u['rol'] ?>">
+                        <button type="submit">Cambiar Rol</button>
+                    </form>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+    </section>
+
+    <?php
+    // Obtener mensajes
+    $sqlMensajes = "SELECT m.id, m.nombre, m.email, m.mensaje, m.fecha, u.usuario 
+                    FROM mensajes m
+                    LEFT JOIN usuarios u ON m.usuario_id = u.id
+                    ORDER BY m.fecha DESC";
+    $stmtMensajes = $base->prepare($sqlMensajes);
+    $stmtMensajes->execute();
+    $mensajes = $stmtMensajes->fetchAll(PDO::FETCH_ASSOC);
     ?>
-    
-    <nav class="navbar"> 
-        <h1> Bienvenido Usuario: </h1>
-        <?php echo $_SESSION["usu"]; ?>
-        
-    <div class="container">
-        <section class="s1">Valores Actuales          
-            <div class="containergrafico">
-                <div class="gaugegrafico">
-                    <h2>Temperatura (°C)</h2>
-                    <canvas id="tempGauge" width="200" height="200"></canvas>
-                    <p id="tempValue"><?php echo $temperatura; ?> °C</p>
-                </div>
-                <div class="gaugegrafico">
-                    <h2>Humedad (%)</h2>
-                    <canvas id="humGauge" width="200" height="200"></canvas>
-                    <p id="humValue"><?php echo $humedad; ?> %</p>
-                </div>
-            </div>
-        </section>
-        
-        <section class="s2">           
-           <h1>DATOS RECIBE Prueba DATABASE</h1>
-           <?php
-                // esto funionaba
-                $sql = "SELECT * FROM datos_recibe ORDER BY fecha DESC LIMIT 10";
-                $resultado = $base->prepare($sql);
-                $resultado->execute(array());
-                $chip = 112;
-               
-                //$sql = "SELECT * FROM datos_recibe ORDER BY fecha DESC LIMIT 10 WHERE chipid = :chip";
-                //$resultado = $base->prepare($sql);
-                //$resultado->execute([':chip' => $chip]);
-                
-            ?>
-        
-            <table style="width:50%; border:4px solid red; align: center;">
+
+    <section>
+        <h2>Mensajes de Contacto</h2>
+        <?php if (count($mensajes) > 0): ?>
+            <table border="1" cellpadding="5">
                 <tr>
                     <th>ID</th>
-                    <th>CHIPID</th>
-                    <th>RESGISTRADO</th>
-                    <th>TEMPERATURA</th>
-                    <th>HUMEDAD</th>
+                    <th>Usuario</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Mensaje</th>
+                    <th>Fecha</th>
                 </tr>
-                <?php
-                    foreach($resultado as $fila):
-                ?>    
+                <?php foreach ($mensajes as $msg): ?>
                 <tr>
-                    <td><?php echo $fila['id']; ?></td>
-                    <td><?php echo $fila['chipid']; ?></td>
-                    <td><?php echo $fila['fecha']; ?></td>
-                    <td><?php echo $fila['temperatura']; ?></td>
-                    <td><?php echo $fila['humedad']; ?></td>
-                </tr> 
-                <?php
-                    endforeach;
-                ?>
+                    <td><?= $msg['id'] ?></td>
+                    <td><?= htmlspecialchars($msg['usuario'] ?? 'No logueado') ?></td>
+                    <td><?= htmlspecialchars($msg['nombre']) ?></td>
+                    <td><?= htmlspecialchars($msg['email']) ?></td>
+                    <td><?= htmlspecialchars($msg['mensaje']) ?></td>
+                    <td><?= $msg['fecha'] ?></td>
+                </tr>
+                <?php endforeach; ?>
             </table>
-            
-        </section>
-        
-        
-        <section class="s3">Agregar chip 
-            <?php
-            //$chipid = $_POST ['chipid'];
-            //$usuario = $_POST ['usuario'];
-            //$descripcion = $_POST ['descripcion'];
-            //$encriptacion = $_POST ['encriptacion'];
-            
-            $fechacreacion = '2023-10-27 15:30:00';
-            $test1 = '0';
-            $test2 = '0';
-            $test3 = '0';
-            
-            $sql = "INSERT INTO chipids (id, fechacreacion, usuario, descripcion, chipid, test1, test2, test3, encriptacion) VALUES (NULL, NOW(), :usuario, :descripcion, :chipid, :test1, :test2, :test3, :encriptacion)";
-            $resultado = $base -> prepare($sql);
-            $resultado ->execute(array(":usuario" => $usuario, ":descripcion" => $descripcion, ":chipid" => $chipid, ":test1" => $test1, ":test2" => $test2, ":test3" => $test3, ":encriptacion" => $encriptacion ));
-            ?>
-    
-        </section>
-        
-        <section class="s4">          
-            <h1>CHIPID VER DATABASE</h1>
-            <?php
-                include("conexion.php");
-                $usuario = $_SESSION["usu"];
-                $sql = "SELECT * FROM chipids WHERE usuario = :usuario";
-                $resultado = $base->prepare($sql);
-                $resultado->execute([':usuario' => $usuario]);
-                // esto funciona tambien pero hardcodeado
-                //$sql = "SELECT * FROM chipids WHERE usuario = 'daniel' ";
-                //$sql = "SELECT * FROM chipids";
-                //$resultado = $base ->prepare($sql);
-                //$resultado ->execute(array());
-            ?>   
-            <table style = "width:50%; border:4px solid red; align: center;">
-                <tr>
-                    <th>ID</th>
-                    <th>USUARIO</th>
-                    <th>DESCRIPCION</th>
-                    <th>CHIPID</th>
-                </tr>
-                <?php
-                    foreach($resultado as $fila):
-                ?>    
-                <tr>
-                   <td><?php echo  $fila['id'] ;  ?>            </td>
-                   <td><?php echo  $fila['usuario'];   ?>       </td>
-                   <td><?php echo  $fila['descripcion'];   ?>   </td>
-                   <td><?php echo  $fila['chipid'];   ?>   </td>
-                </tr> 
-                <?php
-                    endforeach;
-                ?>
-            </table> 
-        </section>
-    </div>
+        <?php else: ?>
+            <p>No hay mensajes registrados.</p>
+        <?php endif; ?>
+    </section>
 
-    <script>
-        function drawGauge(canvasId, value, maxValue, unit, label) {
-            const canvas = document.getElementById(canvasId);
-            const ctx = canvas.getContext('2d');
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
-            const radius = canvas.width / 2 - 20;
-
-            // Fondo del indicador
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius, Math.PI, 2 * Math.PI, false);
-            ctx.lineWidth = 20;
-            ctx.strokeStyle = '#ddd';
-            ctx.stroke();
-
-            // Arco de progreso
-            const progress = (value / maxValue) * Math.PI;
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius, Math.PI, Math.PI + progress, false);
-            ctx.strokeStyle = canvasId === 'tempGauge' ? '#ff4d4d' : '#4d79ff';
-            ctx.stroke();
-
-            // Texto en el centro
-            ctx.font = '20px Arial';
-            ctx.fillStyle = '#333';
-            ctx.textAlign = 'center';
-            ctx.fillText(label, centerX, centerY + 50);
-        }
-
-        // Dibujar indicadores
-        drawGauge('tempGauge', <?php echo $temperatura; ?>, 50, '°C', 'Temperatura');
-        drawGauge('humGauge', <?php echo $humedad; ?>, 100, '%', 'Humedad');
-    </script>
 
 </body>
 </html>
