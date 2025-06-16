@@ -10,11 +10,9 @@
 </head>
 <body>
     <?php include 'header.php'?>
-
     <section class="iot-banner">
     <h1>Pagina CLOUD IOT en REPARACIONES...</h1>
     </section>
-
     <section class="iot">
          <div>       
             <a href="login\login_ver.php">IR FORMULARIO VER TODOS LOS LOGIN</a>  
@@ -39,13 +37,8 @@
         </div>
         <div>       
             <a href="iot\formularioTest.html">IR FORMULARIO TEST TEMPERATURAS</a>  
-        </div>
-        <div>       
-            <a href="index.php">VOLVER A INICIO</a>  
-        </div>    
+        </div>   
     </section>
-  
-  
     <?php include 'footer.php'?>
 </body>
 </html>

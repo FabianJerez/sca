@@ -5,11 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nosotros - SCA SOFTWARE</title>
-    
     <link rel="stylesheet" href="css/headerfooter.css">
     <link rel="stylesheet" href="css/nosotros.css">
 </head>
-
 <body>
     <?php include 'header.php'; ?>
 
@@ -20,7 +18,7 @@
     <section class="nosotros">
         <div class="nosotros-content">
             <h2>¿Quiénes Somos?</h2>
-            <p>En <strong>SCA Automatizaciones</strong>, somos una Pyme apasionada por la innovación y la tecnología, dedicada al desarrollo, fabricación e integración de maquinaria y electronica. Con años de experiencia en el sector, nuestro objetivo es ofrecer soluciones personalizadas que impulsen la productividad y la eficiencia de nuestros clientes.</p>
+            <p>En <strong>SCA SOFTWARE</strong>, somos una Pyme apasionada por la innovación y la tecnología, dedicada al desarrollo, fabricación e integración de maquinaria y electronica. Con años de experiencia en el sector, nuestro objetivo es ofrecer soluciones personalizadas que impulsen la productividad y la eficiencia de nuestros clientes.</p>
             <p>Nuestra filosofía se basa en la calidad, la atención al detalle y el compromiso con la satisfacción del cliente. Contamos con un equipo de profesionales altamente capacitados y un enfoque en la mejora continua, lo que nos permite adaptarnos a las necesidades específicas de cada proyecto.</p>
 
             <h3>Nuestra Misión</h3>
@@ -81,7 +79,7 @@
             </div> -->
 
             <div class="nosotros-cta">
-                <a href="contacto.html" class="login-btn">Contáctanos</a>
+                <a href="contacto.php" class="login-btn">Contáctanos</a>
             </div>
         </div>
     </section>
@@ -123,5 +121,4 @@
         <a href="index.php">VOLVER A INICIO</a>  
     </div>
 </body>
-
 </html>

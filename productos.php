@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos</title>
+    <title>Productos - SCA SOFTWARE</title>
     <link rel="stylesheet" href="css/productos.css">
     <link rel="stylesheet" href="css/headerfooter.css">
 </head>
-
-<?php include "header.php" ?>
-
 <body>
+    <?php include "header.php" ?>
     <div class="carousel-container">
         <div class="carousel">
             <div class="carousel-item" id="item1">
@@ -47,8 +45,8 @@
             </div>
         </div>
         <div class="carousel-nav">
-            <button onclick="prevSlide()">◄</button>
-            <button onclick="nextSlide()">►</button>
+            <button onclick="prevSlide()" title="Anterior">◄</button>
+            <button onclick="nextSlide()" title="Siguiente">►</button>
         </div>
     </div>
 
@@ -75,8 +73,6 @@
         // Rotación automática
         setInterval(nextSlide, 5000);
     </script>
+    <?php include "footer.php" ?>
 </body>
-
-<?php include "footer.php" ?>
-
 </html>

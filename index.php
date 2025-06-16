@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_GET["logout"]) && $_GET["logout"] == 1) {
-    echo "<p style='color: green;'>✅ Sesión cerrada correctamente.</p>";
+    echo "<p style='color: green;'>Sesi贸n cerrada correctamente.</p>";
 }
 ?>
 <!DOCTYPE html>
@@ -9,8 +9,8 @@ if (isset($_GET["logout"]) && $_GET["logout"] == 1) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SCA Automatizaciones ofrece soluciones de monitoreo IoT y automatización industrial en Villa Madero, Buenos Aires.">
-<meta name="keywords" content="automatizaciones, IoT, monitoreo, Buenos Aires">
+    <meta name="description" content="SCA Software ofrece soluciones de monitoreo IoT en Villa Madero, Buenos Aires.">
+<meta name="keywords" content="Software, IoT, monitoreo, Buenos Aires">
     <title>SCA SOFTWARE</title>
    
     <link rel="stylesheet" href="css/headerfooter.css">
@@ -18,17 +18,13 @@ if (isset($_GET["logout"]) && $_GET["logout"] == 1) {
     <script src="js/scripts.js"></script>
 </head>
 <body>
-    
     <?php include 'header.php'?>
-
     <section class="hero">
         <div class="hero-text">
-            <h1>Somos una Pyme que desarrolla, fabrica e integra sistemas electronicos y Software de calidad</h1>
-            <h3>Tenemos desarrollos enlatados y ademas de nuestra seccion de Servicio Tecnico para satisfacer su inversion con la garantia de PostVenta de todos los productos.</h3>
+            <h1>Somos una Pyme que desarrolla, fabrica e integra sistemas electr贸nicos y software de calidad</h1>
+            <h3>Ofrecemos desarrollos listos para usar, adem谩s de una secci贸n de Servicio T茅cnico dedicada, garantizando postventa en todos nuestros productos.</h3>
         </div>
     </section>
-
     <?php include 'footer.php'?>
-
 </body>
 </html>
