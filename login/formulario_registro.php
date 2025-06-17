@@ -1,3 +1,13 @@
+<?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+require_once __DIR__ . '/../config.php'; // Asegurate que este archivo existe y define BASE_URL
+?>
 <!DOCTYPE html>
 <html lang="es">
 

@@ -13,7 +13,7 @@ $config = [
         'DB_PORT' => '3306',
         'DB_NAME' => 'sca',
         'DB_USER' => 'root',
-        'DB_PASS' => '1234',
+        'DB_PASS' => '',
     ],
     'prod' => [
         'DB_HOST' => 'localhost',
