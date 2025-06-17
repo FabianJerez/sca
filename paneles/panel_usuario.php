@@ -6,10 +6,12 @@
         exit();
     }
 
-    include("../conection/conexion.php");
+    require_once __DIR__ . '/../config.php';
+    require_once __DIR__ . '/../includes/db.php';
+
     
     $sql = "SELECT * FROM datos_recibe ORDER BY fecha DESC LIMIT 3";
-    $resultado = $base->prepare($sql);
+    $resultado = $conn->prepare($sql);
     $resultado->execute(array());
 
     foreach($resultado as $fila):
@@ -19,7 +21,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,15 +32,8 @@
     <link rel="stylesheet" href="../css/panel.css">
 </head>
 <body>
-    <?php 
-    include 'headerpanel.php'; 
-    ?>
+    <?php include __DIR__ . '/../header.php'; ?>
     
-    <nav class="navbar"> 
-        <h1> Bienvenido Usuario: </h1>
-        <?php echo $_SESSION["usu"]; ?>
-        
-    </nav>
     <div class="container">
         <section class="s1">Valores Actuales          
             <div class="containergrafico">
@@ -60,7 +55,7 @@
            <?php
                 // esto funionaba
                 $sql = "SELECT * FROM datos_recibe ORDER BY fecha DESC LIMIT 10";
-                $resultado = $base->prepare($sql);
+                $resultado = $conn->prepare($sql);
                 $resultado->execute(array());
                 $chip = 112;
                
@@ -117,7 +112,7 @@
               
                 $usuario = $_SESSION["usu"];
                 $sql = "SELECT * FROM chipids WHERE usuario = :usuario";
-                $resultado = $base->prepare($sql);
+                $resultado = $conn->prepare($sql);
                 $resultado->execute([':usuario' => $usuario]);
             ?> 
             

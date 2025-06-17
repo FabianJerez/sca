@@ -1,32 +1,18 @@
 <?php
 session_start();
-require_once __DIR__ . '/config.php';
 
-// Asegurarse que solo usuarios logueados accedan
 if (!isset($_SESSION["usuario_id"])) {
-    header("Location: " . BASE_URL . "login/login.php");
+    header("Location: login/login.php");
     exit();
 }
 
-// Rol del usuario (por ejemplo: cliente o administrador)
-$rol = $_SESSION["usuario_rol"] ?? 'cliente';
-$usuario_nombre = $_SESSION["usuario_nombre"] ?? 'Usuario';
+$rol = $_SESSION["rol"] ?? 'usuario'; // valor por defecto
 
-// Sección seleccionada
-$seccion = $_GET['seccion'] ?? 'iot';
+if ($rol === 'admin') {
+    header("Location: paneles/panel_admin.php");
+    exit();
+} else {
+    header("Location: paneles/panel_usuario.php");
+    exit();
+}
 ?>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Panel de Usuario - SCA SOFTWARE</title>
-    <link rel="stylesheet" href="<?= BASE_URL ?>css/panel.css">
-</head>
-<body>
-    <div class="panel-container">
-        <aside class="sidebar">
-            <h2>Panel</h2>
-            <p>Hola, <?= htmlspecialchars($usuario_nombre) ?></p>
-            <ul>
-                <li><a href="?seccion=iot" <?= $seccion === 'iot' ? 'class="activo"' : '' ?>>IoT</a></l

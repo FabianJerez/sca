@@ -26,8 +26,13 @@ try {
         $_SESSION["rol"] = $fila["rol"];
         $_SESSION["email"] = $fila["email"];
 
-        // Redirección segura
-        $destino = BASE_URL . "panel.php";
+        // Redirección según rol
+        if (strtolower($fila["rol"]) === "admin") {
+            $destino = BASE_URL . "paneles/panel_admin.php";
+        } else {
+            $destino = BASE_URL . "paneles/panel_usuario.php";
+        }
+        // Si vino un redirect personalizado válido, se respeta
         if (!empty($redirect) && !preg_match('/^https?:\/\//', $redirect)) {
             $destino = BASE_URL . ltrim($redirect, '/');
         }
