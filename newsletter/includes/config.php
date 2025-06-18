@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/auth.php';
+require_once __DIR__ . '/../../includes/auth.php';
 
 // Configuración segura para PHPMailer
 define('GMAIL_USER', 'likid88@gmail.com');          //cuenta de Gmail del Administrador

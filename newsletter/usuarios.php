@@ -86,4 +86,3 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </tr>
     <?php endforeach; ?>
 </table>
-
