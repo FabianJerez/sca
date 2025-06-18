@@ -1,21 +1,39 @@
 <?php
-require_once  'includes/db.php';
-require_once __DIR__ . '/auth.php';
-require_once  'includes/utils.php';
-
-if (getUserRole() === 'administrativo') {//antes de listar se da de baja (automatica) si pasaron mas de 4 años desde la fecha de suscripcion
-    verificarYDarBajaAutomatica($conn);
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
 
-$rol = getUserRole();
-if (!in_array($rol, ['profesor', 'administrativo'])) {  //solo esta disponible la funcion listar para profesor y administrativo
+require_once __DIR__ . '/includes/db.php';
+require_once __DIR__ . '/includes/auth.php';
+require_once __DIR__ . '/includes/utils.php';
+
+if (getUserRole() !== 'admin') {
     exit('Acceso no autorizado.');
 }
 
-$result = $conn->query("SELECT nombre, apellido, email FROM usuarios WHERE newsletter = 1 AND activo = 1");
+// Ejecutar baja automática si aplica
+verificarYDarBajaAutomatica($conn);
 
-echo "<h2>Suscriptores al Newsletter</h2><ul>";
-while ($row = $result->fetch_assoc()) {
-    echo "<li>{$row['nombre']} {$row['apellido']} - {$row['email']}</li>";
-}
-echo "</ul>";
+// Obtener suscriptores activos
+$stmt = $conn->prepare("SELECT nombre, apellido, email, fecha_suscripcion FROM newsletter WHERE activo = 1 ORDER BY fecha_suscripcion DESC");
+$stmt->execute();
+$suscriptores = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<h2 style="margin-bottom: 10px;">Suscriptores Activos al Newsletter</h2>
+
+<?php if ($suscriptores): ?>
+    <ul style="line-height: 1.6;">
+        <?php foreach ($suscriptores as $s): ?>
+            <li>
+                <strong><?= htmlspecialchars($s['nombre']) ?> <?= htmlspecialchars($s['apellido']) ?></strong> -
+                <?= htmlspecialchars($s['email']) ?> 
+                (desde <?= date("d/m/Y", strtotime($s['fecha_suscripcion'])) ?>)
+            </li>
+        <?php endforeach; ?>
+    </ul>
+    <p><strong>Total de suscriptores: <?= count($suscriptores) ?></strong></p>
+<?php else: ?>
+    <p>No hay suscriptores activos actualmente.</p>
+<?php endif; ?>
+

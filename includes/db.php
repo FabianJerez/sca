@@ -9,7 +9,7 @@ try {
     );
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $conn->exec("SET NAMES utf8");
+    $conn->exec("SET NAMES utf8mb4");
 } catch (PDOException $e) {
     die("Error de conexión: " . $e->getMessage());
 }

@@ -1,7 +1,8 @@
 <?php
 $modo_embebido = true;
-require_once __DIR__ . '/includes/db.php';
-require_once __DIR__ . '/includes/auth.php';
+
+require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/includes/utils.php';
 
 if (!esAdministrativo()) {
@@ -11,20 +12,22 @@ if (!esAdministrativo()) {
 $id = $_GET['id'] ?? null;
 
 if ($id) {
-    $stmt = $conn->prepare("SELECT newsletter FROM usuarios WHERE id_usuario = ?");
+    // Verificar si el usuario ya está activo
+    $stmt = $conn->prepare("SELECT activo FROM newsletter WHERE id = ?");
     $stmt->execute([$id]);
     $estado = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($estado && $estado['newsletter'] == 1) {
-        echo "El usuario ya está suscripto al newsletter.";
+    if ($estado && $estado['activo'] == 1) {
+        echo "Este suscriptor ya está activo en el newsletter.";
     } else {
         $nuevo_token = generarToken();
-        $stmt = $conn->prepare("UPDATE usuarios SET newsletter = 1, unsuscribe_token = ?, fecha_suscripcion = NOW() WHERE id_usuario = ?");
+
+        $stmt = $conn->prepare("UPDATE newsletter SET activo = 1, token = ?, fecha_suscripcion = NOW() WHERE id = ?");
         $stmt->execute([$nuevo_token, $id]);
-        header("Location: panel.php?seccion=usuarios");
+
+        header("Location: ../panel.php?seccion=newsletter&sub=suscriptos");
         exit;
     }
 } else {
-    echo "ID de usuario no proporcionado.";
+    echo "ID del suscriptor no proporcionado.";
 }
-?>

@@ -1,5 +1,5 @@
 <?php
-require_once  'includes/db.php';
+require_once __DIR__ . '/../includes/db.php';
 
 $token = $_GET['token'] ?? '';
 
@@ -7,11 +7,11 @@ if (empty($token)) {
     exit("Token inválido.");
 }
 
-$stmt = $conn->prepare("UPDATE usuarios SET newsletter = 0 WHERE unsuscribe_token = ?");
+$stmt = $conn->prepare("UPDATE newsletter SET activo = 0 WHERE token = ?");
 $stmt->execute([$token]);
 
 if ($stmt->rowCount() > 0) {
-    echo "Te desuscribiste del newsletter correctamente.";
+    echo "<h2>Te desuscribiste del newsletter correctamente.</h2>";
 } else {
-    echo "Token inválido o usuario ya desuscripto.";
+    echo "<h2>El enlace es inválido o ya te habías desuscripto.</h2>";
 }

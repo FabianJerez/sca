@@ -12,7 +12,6 @@ $rol = $_SESSION["rol"];
 $vista = $_GET['vista'] ?? 'home';
 $seccion = $_GET['seccion'] ?? '';
 $subseccion = $_GET['sub'] ?? '';
-
 ?>
 
 <!DOCTYPE html>
@@ -21,9 +20,7 @@ $subseccion = $_GET['sub'] ?? '';
     <meta charset="UTF-8">
     <title>Panel Principal</title>
     <link rel="stylesheet" href="<?= BASE_URL ?>css/headerfooter.css">
-
     <link rel="stylesheet" href="<?= BASE_URL ?>css/panel2.css">
-
 </head>
 <body>
 
@@ -52,37 +49,54 @@ $subseccion = $_GET['sub'] ?? '';
                 <a href="panel.php?seccion=mensajes&sub=ver">Ver Mensajes</a>
                 <!-- <a href="panel.php?seccion=mensajes&sub=responder">Responder</a> -->
             <?php elseif ($seccion === 'newsletter'): ?>
-                <a href="panel.php?seccion=newsletter&sub=suscriptos">Ver Suscriptos</a>
-                <a href="panel.php?seccion=newsletter&sub=envios">Envios</a>
+                <?php if ($rol === 'admin'): ?>
+                    <a href="panel.php?seccion=newsletter&sub=suscriptos">Ver Clientes</a>
+                    <a href="panel.php?seccion=newsletter&sub=envios">Enviar Newsletter</a>
+                    <a href="panel.php?seccion=newsletter&sub=baja">Bajas Automáticas</a>
+                <?php elseif ($rol === 'usuario'): ?>
+                    <a href="panel.php?seccion=newsletter&sub=suscripcion">Suscribirse al Newsletter</a>
+                <?php endif; ?>
             <?php endif; ?>
+
         </nav>
         <!-- Contenido principal -->
         <main class="panel-content">
             <?php
             if ($seccion === 'iot') {
                 if ($subseccion === 'ver') {
-                    include 'paneles/iot/ver_chips.php';
+                    include 'iot/ver_chips.php';
                 } elseif ($subseccion === 'agregar') {
-                    include 'paneles/iot/agregar_chip.php';
+                    include 'iot/agregar_chip.php';
                 } else {
                     echo "<p>Seleccioná una opción de IOT.</p>";
                 }
             }
             elseif ($seccion === 'mensajes') {
                 if (isset($_GET['id'])) {
-                    include 'mensajes/responder.php'; // ✅ responder.php sin HTML
+                    include 'mensajes/responder.php';
                 } else {
                     include 'mensajes/ver_mensajes.php';
                 }
             }
-
             elseif ($seccion === 'newsletter') {
-                if ($subseccion === 'suscriptos') {
-                    include 'paneles/newsletter/suscriptos.php';
-                } elseif ($subseccion === 'envios') {
-                    include 'paneles/newsletter/envios.php';
+                if ($rol === 'admin') {
+                    if ($subseccion === 'suscriptos') {
+                        include 'newsletter/usuarios.php';
+                    } elseif ($subseccion === 'envios') {
+                        include 'newsletter/enviar_newsletter.php';
+                    } elseif ($subseccion === 'baja') {
+                        include 'newsletter/cron_baja.php';
+                    } else {
+                        echo "<p>Seleccioná una opción de Newsletter desde la barra superior.</p>";
+                    }
+                } elseif ($rol === 'usuario') {
+                    if ($subseccion === 'suscripcion') {
+                        include 'newsletter/suscripcion.php';
+                    } else {
+                        echo "<p>Seleccioná <strong>Suscribirse al Newsletter</strong> desde la barra superior.</p>";
+                    }
                 } else {
-                    echo "<p>Seleccioná una opción de Newsletter.</p>";
+                    echo "<p>Acceso no autorizado.</p>";
                 }
             }
             else {
@@ -91,7 +105,6 @@ $subseccion = $_GET['sub'] ?? '';
             ?>
         </main>
     </div>
-
 </div>
 
 </body>

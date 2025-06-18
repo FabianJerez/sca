@@ -1,36 +1,40 @@
 <?php
-require_once __DIR__ . '/auth.php';
+require_once __DIR__ . '/../../includes/auth.php';
 
-function verificarYDarBajaAutomatica($conn) {
-    // Buscar usuarios que cumplan con el criterio de baja
+/**
+ * Da de baja a suscriptores antiguos del newsletter.
+ * Actualmente se da de baja a quienes llevan más de 4 años suscriptos.
+ */
+function verificarYDarBajaAutomatica(PDO $conn): array {
     $sqlSelect = "
-        SELECT id_usuario, nombre, apellido, email, fecha_suscripcion
-        FROM usuarios
-        WHERE newsletter = 1 
-          AND fecha_suscripcion IS NOT NULL 
+        SELECT id, nombre, apellido, email, fecha_suscripcion
+        FROM newsletter
+        WHERE activo = 1
+          AND fecha_suscripcion IS NOT NULL
           AND fecha_suscripcion < (NOW() - INTERVAL 4 YEAR)
     ";
     $stmt = $conn->prepare($sqlSelect);
     $stmt->execute();
     $bajas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Si hay usuarios para dar de baja, actualizamos
     if (!empty($bajas)) {
         $sqlUpdate = "
-            UPDATE usuarios 
-            SET newsletter = 0,
-                unsuscribe_token = NULL
-            WHERE newsletter = 1 
-              AND fecha_suscripcion IS NOT NULL 
+            UPDATE newsletter
+            SET activo = 0
+            WHERE activo = 1
+              AND fecha_suscripcion IS NOT NULL
               AND fecha_suscripcion < (NOW() - INTERVAL 4 YEAR)
         ";
         $conn->exec($sqlUpdate);
     }
 
-    return $bajas; // Devuelve array (vacío si no hubo bajas)
+    return $bajas;
 }
 
-function generarToken($longitud = 32) {
+/**
+ * Genera un token único para baja de newsletter.
+ */
+function generarToken($longitud = 32): string {
     return bin2hex(random_bytes($longitud / 2));
 }
-?>
+
