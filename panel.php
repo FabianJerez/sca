@@ -10,6 +10,9 @@ if (!isset($_SESSION["usuario_id"])) {
 
 $rol = $_SESSION["rol"];
 $vista = $_GET['vista'] ?? 'home';
+$seccion = $_GET['seccion'] ?? '';
+$subseccion = $_GET['sub'] ?? '';
+
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +21,9 @@ $vista = $_GET['vista'] ?? 'home';
     <meta charset="UTF-8">
     <title>Panel Principal</title>
     <link rel="stylesheet" href="<?= BASE_URL ?>css/headerfooter.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>css/panel.css">
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>css/panel2.css">
+
 </head>
 <body>
 
@@ -27,29 +32,66 @@ $vista = $_GET['vista'] ?? 'home';
 <div class="panel-container">
     <!-- Barra lateral -->
     <aside class="sidebar">
-        <h3>Menú</h3>
+        <h3>Panel</h3>
+        <br>
         <ul>
-            <?php if ($rol === 'usuario'): ?>
-                <li><a href="panel.php?vista=contenido_usuario/mis_mensajes">Mis Mensajes</a></li>
-            <?php elseif ($rol === 'admin'): ?>
-                <li><a href="panel.php?vista=contenido_admin/ver_mensajes">Ver Mensajes</a></li>
-            <?php endif; ?>
-            <!-- Otras opciones según el rol -->
-            <li><a href="login/logout.php">Cerrar sesión</a></li>
+            <li><a href="panel.php?seccion=iot">IOT</a></li>
+            <br>
+            <li><a href="panel.php?seccion=mensajes">Mensajes</a></li>
+            <br>
+            <li><a href="panel.php?seccion=newsletter">Newsletter</a></li>
         </ul>
     </aside>
+    <div class="panel-body">
+        <!-- Barra superior dinámica -->
+        <nav class="subnav">
+            <?php if ($seccion === 'iot'): ?>
+                <a href="panel.php?seccion=iot&sub=ver">Ver Chips</a>
+                <a href="panel.php?seccion=iot&sub=agregar">Agregar Chip</a>
+            <?php elseif ($seccion === 'mensajes'): ?>
+                <a href="panel.php?seccion=mensajes&sub=ver">Ver Mensajes</a>
+                <!-- <a href="panel.php?seccion=mensajes&sub=responder">Responder</a> -->
+            <?php elseif ($seccion === 'newsletter'): ?>
+                <a href="panel.php?seccion=newsletter&sub=suscriptos">Ver Suscriptos</a>
+                <a href="panel.php?seccion=newsletter&sub=envios">Envios</a>
+            <?php endif; ?>
+        </nav>
+        <!-- Contenido principal -->
+        <main class="panel-content">
+            <?php
+            if ($seccion === 'iot') {
+                if ($subseccion === 'ver') {
+                    include 'paneles/iot/ver_chips.php';
+                } elseif ($subseccion === 'agregar') {
+                    include 'paneles/iot/agregar_chip.php';
+                } else {
+                    echo "<p>Seleccioná una opción de IOT.</p>";
+                }
+            }
+            elseif ($seccion === 'mensajes') {
+                if (isset($_GET['id'])) {
+                    include 'mensajes/responder.php'; // ✅ responder.php sin HTML
+                } else {
+                    include 'mensajes/ver_mensajes.php';
+                }
+            }
 
-    <!-- Contenido principal -->
-    <main class="panel-content">
-        <?php
-        $ruta = __DIR__ . '/paneles/' . $vista . '.php';
-        if (file_exists($ruta)) {
-            include $ruta;
-        } else {
-            echo "<h2>Bienvenido, " . htmlspecialchars($_SESSION["usuario_nombre"]) . "</h2>";
-        }
-        ?>
-    </main>
+            elseif ($seccion === 'newsletter') {
+                if ($subseccion === 'suscriptos') {
+                    include 'paneles/newsletter/suscriptos.php';
+                } elseif ($subseccion === 'envios') {
+                    include 'paneles/newsletter/envios.php';
+                } else {
+                    echo "<p>Seleccioná una opción de Newsletter.</p>";
+                }
+            }
+            else {
+                echo "<p>Elegí una sección desde la barra lateral.</p>";
+            }
+            ?>
+        </main>
+    </div>
+
 </div>
 
 </body>

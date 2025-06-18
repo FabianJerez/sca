@@ -90,40 +90,32 @@ endforeach;
         </section>
         
         <section class="s3">
+            <!-- Barra lateral
+            <aside class="sidebar">
+                <h3>Panel Admin</h3>
+                <ul>
+                    <li><a href="panel.php?seccion=iot">IOT</a></li>
+                    <br>
+                    <li><a href="panel.php?seccion=mensajes">Mensajes</a></li>
+                    <br>
+                    <li><a href="panel.php?seccion=newsletter">Newsletter</a></li>
+                </ul>
+            </aside> -->
+
             <!-- Barra lateral -->
             <nav style="min-width: 300px; padding: 30px;">
                 <h3>Panel Administrador</h3>
+                <br>
                 <p><?= $_SESSION['usu'] ?> (<?= $_SESSION['rol'] ?>)</p>
+                <br>
                 <form method="get">
-                    <label for="seccion"> IOT:</label>
-                    <select name="seccion" id="seccion" onchange="this.form.submit()">
-                        <option value="">-- Elegí una opción --</option>
-                        <option value="suscriptos">Ver suscriptos</option>
-                        <option value="chips">Administrar CHIPS</option>
-                        <option value="newsletter">Administrar Newsletter</option>
-                        <option value="suscripcion">Administrar Usuarios</option>
-                        <option value="xx">XX</option>
-                        <option value="ccc">CCC</option>
-                    </select>
-                </form>
+                    <button name="seccion iot" value="suscriptos" style="width: 100%; margin-bottom: 20px;">IOT</button>
+                 
+                    <button name="seccion mensajes" value="chips" style="width: 100%; margin-bottom: 20px;">MENSAJES</button>
 
-                <!-- <form method="get">
-                    <button name="seccionx" value="suscriptos" style="width: 100%; margin-bottom: 20px;">Ver suscriptos</button>
-                 
-                    <button name="seccion1" value="chips" style="width: 100%; margin-bottom: 20px;">Administrar CHIPS</button>
-               
-                
-                 
-                    <button name="seccion2" value="newsletter" style="width: 100%; margin-bottom: 20px;">Administrar Newsletter</button>
-                
-                 
-                    <button name="seccion3" value="suscripcion" style="width: 100%; margin-bottom: 20px;">Administrar Usuariosr</button>
-               
-                
-                    <button name="seccion4" value="xx" style="width: 100%; margin-bottom: 20px;">xxr</button>
-               
-                    <button name="seccion5" value="ccc" style="width: 100%; margin-bottom: 20px;">ccc</button>
-                </form> -->
+                    <button name="seccion2" value="newsletter" style="width: 100%; margin-bottom: 20px;"> NEWSLETTER</button>
+                                 
+                </form>
             </nav>
         </section>
         
@@ -199,7 +191,7 @@ endforeach;
     </script>
 
     <?php
-    $seccion = $_GET['seccion'] ?? '';
+    $seccion = $_GET['seccion iot'] ?? '';
 
     switch ($seccion) {
         case 'suscriptos':

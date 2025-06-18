@@ -1,54 +1,46 @@
 <?php
-session_start();
-if (!isset($_SESSION["usuario_id"]) || $_SESSION["rol"] !== "admin") {
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+if (!isset($_SESSION["usuario_id"])) {
     header("Location: ../login/login.php");
     exit;
 }
-
-require("conexion.php");
-
+require_once __DIR__ . '/../includes/db.php';
 $id = $_GET['id'] ?? null;
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $respuesta = $_POST["respuesta"] ?? '';
-
-    $stmt = $conexion->prepare("UPDATE mensajes SET respuesta = ?, estado = 'Resuelto' WHERE id = ?");
-    $stmt->bind_param("si", $respuesta, $id);
-
-    if ($stmt->execute()) {
-        header("Location: ver_mensajes.php");
-        exit;
-    } else {
-        echo "❌ Error al guardar la respuesta.";
-    }
-    $stmt->close();
+if (!$id) {
+    echo "<p>Error: No se recibió el ID del mensaje.</p>";
+    return;
 }
+$respuesta = $_POST['respuesta'] ?? null;
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $id && $respuesta) {
+    // Actualizar mensaje con la respuesta y marcar como resuelto
+    $stmt = $conn->prepare("UPDATE mensajes SET respuesta = ?, estado = 'Resuelto' WHERE id = ?");
+    $stmt->execute([$respuesta, $id]);
+    header("Location: " . BASE_URL . "panel.php?seccion=mensajes&sub=ver");
+    exit;
+}
+// Obtener mensaje original
+$stmt = $conn->prepare("SELECT * FROM mensajes WHERE id = ?");
+$stmt->execute([$id]);
+$mensaje = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Traer mensaje para mostrarlo
-$stmt = $conexion->prepare("SELECT * FROM mensajes WHERE id = ?");
-$stmt->bind_param("i", $id);
-$stmt->execute();
-$resultado = $stmt->get_result();
-$mensaje = $resultado->fetch_assoc();
+if (!$mensaje) {
+    echo "Mensaje no encontrado.";
+    exit;
+}
 ?>
+<h2>Responder mensaje</h2>
+<br>
+<p><strong>Remitente:</strong> <?= htmlspecialchars($mensaje['remitente']) ?></p>
+<br>
+<p><strong>Asunto:</strong> <?= htmlspecialchars($mensaje['asunto']) ?></p>
+<br>
+<p><strong>Mensaje:</strong><br><?= nl2br(htmlspecialchars($mensaje['mensaje'])) ?></p>
+<br>
+<form method="post">
+    <label for="respuesta">Tu respuesta:</label><br>
+    <textarea name="respuesta" id="respuesta" rows="5" cols="50" required><?= htmlspecialchars($mensaje['respuesta'] ?? '') ?></textarea><br><br>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Responder Mensaje</title>
-</head>
-<body>
-    <h2>Responder a: <?php echo htmlspecialchars($mensaje['remitente']); ?></h2>
-    <p><strong>Asunto:</strong> <?php echo htmlspecialchars($mensaje['asunto']); ?></p>
-    <p><strong>Mensaje:</strong> <?php echo nl2br(htmlspecialchars($mensaje['mensaje'])); ?></p>
-
-    <form method="post">
-        <label for="respuesta">Respuesta:</label><br>
-        <textarea name="respuesta" rows="5" cols="60" required></textarea><br><br>
-        <button type="submit">Enviar Respuesta</button>
-    </form>
-
-    <p><a href="ver_mensajes.php">⬅️ Volver a la lista</a></p>
-</body>
-</html>
+    <button type="submit">Enviar respuesta</button>
+</form>
