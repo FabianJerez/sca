@@ -41,6 +41,5 @@ if (!$mensaje) {
 <form method="post">
     <label for="respuesta">Tu respuesta:</label><br>
     <textarea name="respuesta" id="respuesta" rows="5" cols="50" required><?= htmlspecialchars($mensaje['respuesta'] ?? '') ?></textarea><br><br>
-
     <button type="submit">Enviar respuesta</button>
 </form>

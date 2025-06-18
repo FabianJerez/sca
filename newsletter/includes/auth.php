@@ -14,17 +14,21 @@ function isLoggedIn() {             //¿está logueado?
     return isset($_SESSION['id_usuario']);
 }
 //Funciones auxiliares para roles específicos
-function esCliente() {
-    return getUserRole() === 'usuario';
+function esEstudiante() {
+    return getUserRole() === 'estudiante';
+}
+
+function esProfesor() {
+    return getUserRole() === 'profesor';
 }
 
 function esAdministrativo() {
-    return getUserRole() === 'admin';
+    return getUserRole() === 'administrativo';
 }
 //comprobacion de login antes de acceder
 function requireLogin() {
     if (!isLoggedIn()) {
-        header("Location: login/login.php");
+        header("Location: login.php");
         exit;
     }
 }
