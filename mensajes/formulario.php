@@ -17,26 +17,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $archivo_nombre = "";
     $estado = "Pendiente"; // Por defecto es "pendiente" una vez que se responde pasa a "resuelto"
 
+    function limpiarNombreArchivo($nombre) {
+        $nombre = str_replace(' ', '_', $nombre);
+        $nombre = iconv('UTF-8', 'ASCII//TRANSLIT', $nombre);
+        return preg_replace('/[^A-Za-z0-9_\-\.]/', '', $nombre);
+    }
+
     if (isset($_FILES['archivoAdjunto']) && $_FILES['archivoAdjunto']['error'] == 0) {
-        $archivo_nombre = uniqid() . "_" . basename($_FILES['archivoAdjunto']['name']);
+        $archivo_nombre = uniqid() . "_" . limpiarNombreArchivo(basename($_FILES['archivoAdjunto']['name']));
         $archivo_temp = $_FILES['archivoAdjunto']['tmp_name'];
-    
-        // Validación de formato y tamaño
-        $permitidos = ['pdf'];
+
+        // Validación MIME
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mime = finfo_file($finfo, $archivo_temp);
+        finfo_close($finfo);
+
+        if ($mime !== 'application/pdf') {
+            die("❌ El archivo no es un PDF válido.");
+        }
+
         $extension = strtolower(pathinfo($archivo_nombre, PATHINFO_EXTENSION));
-    
-        if (!in_array($extension, $permitidos)) {
+        if (!in_array($extension, ['pdf'])) {
             die("❌ Tipo de archivo no permitido.");
         }
-    
+
         if ($_FILES['archivoAdjunto']['size'] > 2 * 1024 * 1024) {
             die("❌ El archivo supera los 2MB permitidos.");
         }
-    
-        // Subida del archivo
-        $ruta_destino = "../uploads/" . basename($archivo_nombre);
+
+        if (!file_exists("../uploads")) {
+            mkdir("../uploads", 0755, true);
+        }
+
+        $ruta_destino = "../uploads/" . $archivo_nombre;
         move_uploaded_file($archivo_temp, $ruta_destino);
     }
+
     
     //preparando consulta
     $stmt = $conexion->prepare("INSERT INTO mensajes (remitente,asunto, email, mensaje, archivo_nombre, estado) VALUES (?, ?, ?, ?, ?, ?)");//evitar la inyeccion de sql
@@ -44,12 +60,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         echo "<script>
-                alert('✅ Mensaje enviado correctamente.');
+                alert(' Mensaje enviado correctamente.');
                 window.location.href = '../mensajes/mis_mensajes.php';
               </script>";
     } else {
         echo "<script>
-                alert('❌ Error al guardar el mensaje.');
+                alert(' Error al guardar el mensaje.');
                 window.location.href = '../contacto.php';
               </script>";
     }
