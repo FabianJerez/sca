@@ -27,8 +27,8 @@ $condiciones = [];
 $parametros = [];
 
 if (!empty($buscar)) {
-    if ($campo === 'nombre_completo') {
-        $condiciones[] = "CONCAT(nombre, ' ', apellido) LIKE ?";
+    if ($campo === 'usuario') {
+        $condiciones[] = "usuario LIKE ?";
         $parametros[] = "%$buscar%";
     } elseif ($campo === 'email') {
         $condiciones[] = "email LIKE ?";
@@ -37,7 +37,7 @@ if (!empty($buscar)) {
 }
 
 // --- Consulta ---
-$sql = "SELECT id, nombre, apellido, email, activo, fecha_suscripcion FROM newsletter";
+$sql = "SELECT id, usuario, email, activo, fecha_suscripcion FROM newsletter";
 
 if (!empty($condiciones)) {
     $sql .= " WHERE " . implode(" AND ", $condiciones);
@@ -62,10 +62,9 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <label for="campo">Buscar por:</label>
     <select name="campo" id="campo">
-        <option value="nombre_completo" <?= $campo === 'nombre_completo' ? 'selected' : '' ?>>Nombre completo</option>
+        <option value="usuario" <?= $campo === 'usuario' ? 'selected' : '' ?>>Usuario</option>
         <option value="email" <?= $campo === 'email' ? 'selected' : '' ?>>Email</option>
     </select>
-
     <input type="text" name="buscar" value="<?= htmlspecialchars($buscar) ?>" placeholder="Buscar..." required>
     <button type="submit">Buscar</button>
 
@@ -75,7 +74,7 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <table border="1" cellpadding="5">
     <tr>
-        <th>Nombre</th>
+        <th>Usuario</th>
         <th>Email</th>
         <th>Fecha de suscripción</th>
         <th>Estado</th>
@@ -84,7 +83,7 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <?php foreach ($usuarios as $u) : ?>
         <tr>
-            <td><?= htmlspecialchars($u['nombre'] . ' ' . $u['apellido']) ?></td>
+            <td><?= htmlspecialchars($u['usuario']) ?></td>
             <td><?= htmlspecialchars($u['email']) ?></td>
             <td><?= $u['fecha_suscripcion'] ? date("d/m/Y", strtotime($u['fecha_suscripcion'])) : '-' ?></td>
             <td><?= $u['activo'] ? 'Activo' : 'Inactivo' ?></td>

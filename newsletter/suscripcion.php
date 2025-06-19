@@ -6,8 +6,7 @@ require_once __DIR__ . '/includes/utils.php';
 requireLogin(); // Cualquier usuario logueado puede suscribirse
 
 $usuario_id = getUserId();
-$nombre = $_SESSION['nombre'] ?? '';
-$apellido = $_SESSION['apellido'] ?? '';
+$usuario = $_SESSION['usuario_nombre'] ?? 'Desconocido';
 $email = $_SESSION['email'] ?? '';
 
 if (!$email) {
@@ -30,9 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$yaSuscripto) {
         $stmt->execute([$token, $email]);
     } else {
         // Alta nueva
-        $stmt = $conn->prepare("INSERT INTO newsletter (nombre, apellido, email, activo, fecha_suscripcion, token)
-                                VALUES (?, ?, ?, 1, NOW(), ?)");
-        $stmt->execute([$nombre, $apellido, $email, $token]);
+        $stmt = $conn->prepare("INSERT INTO newsletter (usuario, email, token, activo, fecha_suscripcion) VALUES (?, ?, ?, 1, NOW())");
+        $stmt->execute([$usuario, $email, $token]);
     }
 
     $mensaje = "Te suscribiste al newsletter correctamente.";
@@ -41,16 +39,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$yaSuscripto) {
 ?>
 
 <h2>Suscripción al Newsletter de SCA</h2>
-
+<br>
 <?php if (isset($mensaje)) : ?>
     <p style="color:green;"><strong><?= htmlspecialchars($mensaje) ?></strong></p>
 <?php endif; ?>
 
 <?php if ($yaSuscripto): ?>
+    <br>
     <p>Ya estás suscripto al newsletter con el correo <strong><?= htmlspecialchars($email) ?></strong>.</p>
 <?php else: ?>
     <form method="POST">
         <p>¿Querés recibir noticias y novedades por correo electrónico?</p>
+        <br>
         <button type="submit">Suscribirme</button>
     </form>
 <?php endif; ?>
