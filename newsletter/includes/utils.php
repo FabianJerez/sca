@@ -7,7 +7,7 @@ require_once __DIR__ . '/../../includes/auth.php';
  */
 function verificarYDarBajaAutomatica(PDO $conn): array {
     $sqlSelect = "
-        SELECT id, nombre, apellido, email, fecha_suscripcion
+        SELECT id, usuario, email, fecha_suscripcion
         FROM newsletter
         WHERE activo = 1
           AND fecha_suscripcion IS NOT NULL
