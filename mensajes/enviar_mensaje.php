@@ -22,9 +22,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $extension = strtolower(pathinfo($archivo_nombre, PATHINFO_EXTENSION));
 
         if (!in_array($extension, $permitidos)) {
-            $error = "❌ Tipo de archivo no permitido.";
+            $error = "Tipo de archivo no permitido.";
         } elseif ($_FILES['archivoAdjunto']['size'] > 2 * 1024 * 1024) {
-            $error = "❌ El archivo supera los 2MB permitidos.";
+            $error = "El archivo supera los 2MB permitidos.";
         } else {
             $ruta_destino = __DIR__ . '/../uploads/' . basename($archivo_nombre);
             move_uploaded_file($archivo_temp, $ruta_destino);
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <h2>Enviar nuevo mensaje a SCA</h2>
 
 <?php if ($mensaje_enviado): ?>
-    <p style="color:green;">✅ Mensaje enviado correctamente.</p>
+    <p style="color:green;">Mensaje enviado correctamente.</p>
 <?php elseif ($error): ?>
     <p style="color:red;"><?= htmlspecialchars($error) ?></p>
 <?php endif; ?>
