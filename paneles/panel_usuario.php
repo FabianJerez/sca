@@ -1,5 +1,7 @@
 <?php
-    session_start();
+    if (session_status() === PHP_SESSION_NONE) {
+    session_start(); // Asegura que no haya múltiples session_start()
+    }
     // Verificar si el usuario está autenticado
     if (!isset($_SESSION["usuario_id"])) {
         header("Location: ../login/login.php");
@@ -94,10 +96,10 @@
         <section class="s3">Seccion 3            
             <section class="iot">
          <div>       
-            <a href="..\iot\chipid_salidas_formulario.html" class="login-btn">Manejar Salidas</a>
+            <a href=".\iot\chipid_salidas_formulario.html" class="login-btn">Manejar Salidas</a>
         </div>
         <div>       
-            <a href="..\mensajes\mis_mensajes.html" class="login-btn">Mensajeria</a>
+            <a href=".\mensajes\mis_mensajes.php" class="login-btn">Mensajeria</a>
         </div>
         
         <div>       

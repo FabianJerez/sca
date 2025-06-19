@@ -7,16 +7,23 @@
     ?>
 
     <div class="logo">
-        <a href="<?= BASE_URL ?>index.php">SCA <span>SOFTWARE</span></a>
+        <a href="../index.php"><img src="../img/logo33.png" alt="Logo ScaSoftware"></a>
     </div>
-
+    <button class="hamburger" aria-label="Alternar menú">☰</button>
     <nav>
         <ul>
             <li><a href="<?= BASE_URL ?>index.php">Inicio</a></li>
             <li><a href="<?= BASE_URL ?>nosotros.php">Nosotros</a></li>
             <li><a href="<?= BASE_URL ?>productos.php">Productos</a></li>
             <li><a href="<?= BASE_URL ?>servicios.php">Servicios</a></li>
-            <li><a href="<?= BASE_URL ?>ifts/login.php">IFTS</a></li>
+            <?php if (isset($_SESSION["usuario_id"])): ?>
+                <li><a href="<?= BASE_URL ?>panel.php">Panel</a></li>
+            <?php endif; ?>
+            <?php if (isset($_SESSION["usuario_id"])): ?>
+                <li><a href="login/logout.php" class="login-link">Salir</a></li>
+            <?php else: ?>
+                <li><a href="login/login.php" class="login-link">Ingresar</a></li>
+            <?php endif; ?>
         </ul>
     </nav>
 
@@ -27,3 +34,12 @@
         <a href="<?= BASE_URL ?>login/login.php" class="login-btn">INGRESAR</a>
     <?php endif; ?>
 </header>
+<script>
+    const hamburger = document.querySelector('.hamburger');
+    const nav = document.querySelector('nav');
+
+    hamburger.addEventListener('click', () => {
+        nav.classList.toggle('active');
+        hamburger.textContent = nav.classList.contains('active') ? '✕' : '☰';
+    });
+</script>

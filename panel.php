@@ -12,6 +12,10 @@ $rol = $_SESSION["rol"];
 $vista = $_GET['vista'] ?? 'home';
 $seccion = $_GET['seccion'] ?? '';
 $subseccion = $_GET['sub'] ?? '';
+
+// if($rol === 'usuario'){
+//     include 'paneles/panel_usuario.php';
+// }
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +52,7 @@ $subseccion = $_GET['sub'] ?? '';
                     <a href="panel.php?seccion=iot&sub=ultimos">Ultimos Registros Recibidos</a>
                     <a href="panel.php?seccion=iot&sub=chips">CHIPIDs Registrados</a>
                 <?php elseif ($rol === 'usuario'): ?>
-                    
+                    <a href="panel.php?seccion=iot&sub=chips">CHIPIDs Registrados</a>
                 <?php endif; ?>
 
             <?php elseif ($seccion === 'mensajes'): ?>
@@ -74,15 +78,16 @@ $subseccion = $_GET['sub'] ?? '';
         <main class="panel-content">
             <?php
             if ($seccion === 'iot') {
-                if ($subseccion === 'valores') {
-                    include __DIR__ . '/iot/valores_actuales.php';
-                } elseif ($subseccion === 'ultimos') {
-                    include __DIR__ . '/iot/ultimos_registros.php';
-                 } elseif ($subseccion === 'chips') {
-                    include __DIR__ . '/iot/chipids_registrados.php';
-                } else {
-                    echo "<p>Seleccioná una opción de IOT.</p>";
-                }
+                
+                    if ($subseccion === 'valores') {
+                        include __DIR__ . '/iot/valores_actuales.php';
+                    } elseif ($subseccion === 'ultimos') {
+                        include __DIR__ . '/iot/ultimos_registros.php';
+                    } elseif ($subseccion === 'chips') {
+                        include __DIR__ . '/iot/chipids_registrados.php';
+                    } else {
+                        echo "<p>Seleccioná una opción de IOT.</p>";
+                    }
             }
             elseif ($seccion === 'mensajes') {
                 if ($rol === 'admin') {

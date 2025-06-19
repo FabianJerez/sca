@@ -1,4 +1,0 @@
-[15-Jun-2025 01:29:36 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method PDOStatement::fetch_assoc() in /home/scasoftw/public_html/ifts/newsletter/cron_baja.php:24
-Stack trace:
-#0 {main}
-  thrown in /home/scasoftw/public_html/ifts/newsletter/cron_baja.php on line 24
