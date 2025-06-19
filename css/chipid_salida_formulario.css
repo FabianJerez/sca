@@ -1,0 +1,97 @@
+/* Estilos generales */
+.form-container {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #E0F7FA; /* Celeste claro */
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Título */
+.form-container h2 {
+    text-align: center;
+    color: #2E7D32; /* Verde oscuro para contraste */
+    margin-bottom: 20px;
+}
+
+/* Estilos para la tabla del formulario */
+.form-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.form-table td {
+    padding: 12px;
+    vertical-align: middle;
+}
+
+/* Etiquetas */
+.form-table label {
+    font-weight: bold;
+    color: #37474F; /* Gris oscuro */
+}
+
+/* Inputs de solo lectura */
+.form-table input[readonly] {
+    background-color: #F5F5F5; /* Gris claro */
+    border: 1px solid #B0BEC5; /* Borde gris */
+    padding: 8px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: not-allowed;
+    color: #37474F;
+}
+
+/* Selects */
+.form-table select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #B0BEC5;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    color: #37474F;
+    cursor: pointer;
+}
+
+.form-table select:focus {
+    outline: none;
+    border-color: #4CAF50; /* Verde claro */
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+/* Botón de enviar */
+.submit-btn {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #4CAF50; /* Verde claro */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #388E3C; /* Verde más oscuro */
+}
+
+/* Responsividad */
+@media (max-width: 600px) {
+    .form-container {
+        margin: 20px;
+        padding: 15px;
+    }
+
+    .form-table td {
+        padding: 8px;
+    }
+
+    .submit-btn {
+        width: 100%;
+    }
+}

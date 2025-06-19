@@ -1,277 +1,362 @@
 /* Estilos generales */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
 }
 
-/* Header */
+/* Estilos para el header */
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #1a3c34;
-    padding: 1rem 2rem;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin: 0.2rem 0.2rem 1rem;
+  background-color: #1a3c34;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-height: 60px;
+  overflow: hidden;
 }
 
-.logo {
-    font-size: 1.5rem;
-    font-weight: bold;
+/* Escalar el logo */
+.logo img {
+  max-width: 100px;
+  height: auto;
+  display: block;
 }
 
-.logo a {
-    color: white;
-    text-decoration: none;
-}
-
-.logo span {
-    color: #00b7b5;
-}
-
+/* Estilos para el menú de navegación */
 nav ul {
-    list-style: none;
-    display: flex;
-    gap: 1.5rem;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+nav ul li {
+  margin: 0 15px;
 }
 
 nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 1rem;
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+  transition: color 0.3s;
 }
 
 nav ul li a:hover {
-    color: #00b7b5;
+  color: #d3d3d3;
 }
 
-.usuario-bienvenida {
-    color: white;
-    font-weight: bold;
-    margin-right: 15px; /* Espaciado opcional */
+/* Estilo para el enlace de Ingresar/Salir en el menú hamburguesa */
+nav ul li a.login-link {
+  display: none; /* Oculta el enlace en pantallas grandes */
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: color 0.3s;
 }
 
+nav ul li a.login-link:hover {
+  color: #d3d3d3;
+}
+
+/* Estilo para el botón de Ingresar/Salir en pantallas grandes */
 .login-btn {
-    background-color: white ;
-    color: #1a3c34;
-    border: 2px solid #1a3c34;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+  text-decoration: none;
+  color: #fff;
+  background-color: #d32f2f;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: background-color 0.3s;
 }
 
 .login-btn:hover {
-    background-color: #3f7d6a;
+  background-color: #b71c1c;
 }
 
+/* Estilos para el botón hamburguesa */
 .hamburger {
-    display: none;
-    font-size: 1.5rem;
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
+  display: none;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0 10px;
 }
 
 /* Hero Section */
 .hero {
-    position: relative;
-    height: 450px;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/image.jpg") no-repeat center center/cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    color: white;
-    margin: 0 1rem 1rem;
-    border-radius: 8px;
+  position: relative;
+  height: 450px;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../img/image.jpg") no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  color: white;
+  margin: 0 1rem 1rem;
+  border-radius: 8px;
 }
 
 .hero-text {
-    line-height: 2rem;
-    text-align: center;
-    max-width: 90%;
+  line-height: 2rem;
+  text-align: center;
+  max-width: 90%;
 }
 
 /* Tabla responsiva */
 table {
-    width: 100%;
-    max-width: 800px;
-    margin: 2rem auto;
-    border-collapse: collapse;
-    border: 4px solid #1a3c34;
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem auto;
+  border-collapse: collapse;
+  border: 4px solid red;
 }
 
-th, td {
-    border: 1px solid black;
-    padding: 0.5rem;
-    text-align: center;
+th,
+td {
+  border: 1px solid black;
+  padding: 0.5rem;
+  text-align: center;
 }
 
 th {
-    background-color: #1a3c34;
-    color: white;
+  background-color: #333;
+  color: white;
 }
 
 /* Footer */
 footer {
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
-    padding: 1rem;
-    background-color: #e0e0e0;
-    margin: 1rem;
-    border-radius: 8px;
-    flex-wrap: wrap;
+  background-color: #e0e0e0;
+  padding: 1rem 0.5rem;
+  margin: 0.5rem;
+  border-radius: 4px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .footer-section {
-    flex: 1;
-    margin: 0 10px;
-    min-width: 200px;
+  flex: 1;
+  min-width: 180px;
+  margin: 0 0.5rem;
 }
 
 .footer-section h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #006600;
+  font-weight: bold;
 }
 
 .footer-section p,
 .footer-section a {
-    font-size: 0.9rem;
-    color: #333;
-    text-decoration: none;
-    line-height: 1.5rem;
+  font-size: 0.9rem;
+  color: #333;
+  text-decoration: none;
+  line-height: 1.4;
+  margin-bottom: 0.3rem;
+}
+
+.footer-section a:hover {
+  color: #004d00;
+  text-decoration: underline;
+}
+
+.newsletter form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .newsletter input[type="email"] {
-    padding: 0.5rem;
-    width: 100%;
-    max-width: 250px;
+  padding: 0.5rem;
+  width: 100%;
+  max-width: 220px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
 }
 
-.newsletter button {
-    font-size: 0.9rem;
-    padding: 0.5rem 1rem;
-    background-color: #d32f2f;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 8px;
-    margin-top: 0.5rem;
+.newsletter button[type="submit"] {
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background-color 0.3s;
+  width: 100%;
+  max-width: 220px;
+}
+
+.newsletter button[type="submit"]:hover {
+  background-color: #b71c1c;
+}
+
+.error-message {
+  display: none;
+  color: #d32f2f;
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
 }
 
 .social-icons {
-    text-align: center;
-    padding: 0.5rem 0;
+  margin-top: 1rem;
+  padding: 0.3rem 0;
 }
 
 .social-icons a {
-    margin: 0 0.5rem;
-    text-decoration: none;
-    color: #333;
-    font-size: 1.2rem;
+  margin: 0 0.6rem;
+  text-decoration: none;
+  color: #333;
 }
 
 .social-icons img {
-    width: 2rem;
-    height: 2rem;
-    vertical-align: middle;
+  width: 2rem;
+  height: 2rem;
+  vertical-align: middle;
+  transition: transform 0.3s;
+}
+
+.social-icons img:hover {
+  transform: scale(1.1);
+}
+
+.copyright {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: #555;
+  border-top: 1px solid #ccc;
+  padding-top: 0.8rem;
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-section {
+    margin: 0.8rem 0;
+  }
+
+  .newsletter input[type="email"],
+  .newsletter button[type="submit"] {
+    max-width: 100%;
+  }
+
+  .social-icons {
+    margin-top: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  footer {
+    padding: 0.8rem 0.3rem;
+    margin: 0.3rem;
+  }
+
+  .footer-section h3 {
+    font-size: 1rem;
+  }
+
+  .footer-section p,
+  .footer-section a {
+    font-size: 0.85rem;
+  }
+
+  .newsletter input[type="email"],
+  .newsletter button[type="submit"] {
+    width: 100%;
+  }
+
+  .social-icons img {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .copyright {
+    font-size: 0.8rem;
+  }
 }
 
 /* Media Queries para responsividad */
 @media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+  header {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-height: none;
+  }
 
-    .logo {
-        margin-bottom: 1rem;
-    }
+  .hamburger {
+    display: block;
+  }
 
-    nav {
-        width: 100%;
-        display: none;
-    }
+  nav {
+    display: none;
+    width: 100%;
+    order: 3;
+  }
 
-    nav.active {
-        display: block;
-    }
+  nav.active {
+    display: block;
+  }
 
-    nav ul {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-    }
+  nav ul {
+    flex-direction: column;
+    width: 100%;
+    padding: 10px 0;
+    background-color: #1a3c34;
+  }
 
-    .login-btn {
-        width: 100%;
-        text-align: center;
-        margin-top: 1rem;
-    }
+  nav ul li {
+    margin: 10px 0;
+    text-align: center;
+  }
 
-    .hamburger {
-        display: block;
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-    }
+  nav ul li a.login-link {
+    display: block; /* Muestra el enlace en el menú hamburguesa */
+    font-size: 16px;
+  }
 
-    .hero {
-        height: 300px;
-        margin: 0 0.5rem 1rem;
-    }
-
-    .hero-text {
-        font-size: 0.9rem;
-        line-height: 1.5rem;
-    }
-
-    table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
-
-    th, td {
-        min-width: 100px;
-    }
-
-    footer {
-        flex-direction: column;
-        gap: 1rem;
-    }
+  .login-btn {
+    display: none; /* Oculta el botón en pantallas pequeñas */
+  }
 }
 
 @media (max-width: 480px) {
-    .logo {
-        font-size: 1.2rem;
-    }
+  .logo img {
+    max-width: 80px;
+  }
 
-    nav ul li a {
-        font-size: 0.9rem;
-    }
-
-    .login-btn {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.9rem;
-    }
-
-    .hero {
-        height: 200px;
-    }
-
-    .hero-text {
-        font-size: 0.8rem;
-    }
+  nav ul li a,
+  nav ul li a.login-link {
+    font-size: 14px;
+  }
 }

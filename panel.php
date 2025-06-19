@@ -43,8 +43,13 @@ $subseccion = $_GET['sub'] ?? '';
         <!-- Barra superior dinámica -->
         <nav class="subnav">
             <?php if ($seccion === 'iot'): ?>
-                <a href="panel.php?seccion=iot&sub=ver">Ver Chips</a>
-                <a href="panel.php?seccion=iot&sub=agregar">Agregar Chip</a>  
+                <?php if ($rol === 'admin'): ?>
+                    <a href="panel.php?seccion=iot&sub=valores">Valores Actuales</a>
+                    <a href="panel.php?seccion=iot&sub=ultimos">Ultimos Registros Recibidos</a>
+                    <a href="panel.php?seccion=iot&sub=chips">CHIPIDs Registrados</a>
+                <?php elseif ($rol === 'usuario'): ?>
+                    
+                <?php endif; ?>
 
             <?php elseif ($seccion === 'mensajes'): ?>
                 <?php if ($rol === 'admin'): ?>
@@ -69,10 +74,12 @@ $subseccion = $_GET['sub'] ?? '';
         <main class="panel-content">
             <?php
             if ($seccion === 'iot') {
-                if ($subseccion === 'ver') {
-                    include 'iot/ver_chips.php';
-                } elseif ($subseccion === 'agregar') {
-                    include 'iot/agregar_chip.php';
+                if ($subseccion === 'valores') {
+                    include __DIR__ . '/iot/valores_actuales.php';
+                } elseif ($subseccion === 'ultimos') {
+                    include __DIR__ . '/iot/ultimos_registros.php';
+                 } elseif ($subseccion === 'chips') {
+                    include __DIR__ . '/iot/chipids_registrados.php';
                 } else {
                     echo "<p>Seleccioná una opción de IOT.</p>";
                 }

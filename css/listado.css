@@ -1,0 +1,95 @@
+section.products {
+    padding: 20px;
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+section.products .contenedor-lista-productos {
+    position: relative;
+    overflow: hidden;
+    max-width: 660px; /* 3 productos: 3 * (200px + 20px gap) */
+    margin: 0 auto;
+}
+
+section.products .lista-productos {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 20px !important;
+    padding: 10px 0 !important;
+    transition: transform 0.3s ease !important;
+}
+
+section.products .product-item {
+    flex: 0 0 200px !important;
+    min-width: 200px !important;
+    max-width: 200px !important;
+    border: 1px solid #ccc !important;
+    padding: 15px !important;
+    margin: 10px !important;
+    text-align: center !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 5px !important;
+    transition: transform 0.2s !important;
+}
+
+section.products .product-item img {
+    max-width: 100% !important;
+    height: 150px !important;
+    object-fit: cover !important;
+}
+
+section.products .product-item:hover {
+    transform: scale(1.05) !important;
+}
+
+section.products .flecha-desplazar {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px 15px !important;
+    cursor: pointer !important;
+    font-size: 24px !important;
+    border-radius: 5px !important;
+    z-index: 10 !important;
+    display: block !important;
+}
+
+section.products .flecha-desplazar.izquierda {
+    left: 10px !important;
+}
+
+section.products .flecha-desplazar.derecha {
+    right: 10px !important;
+}
+
+section.products .flecha-desplazar:hover {
+    background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Media Queries para responsividad */
+@media (max-width: 768px) {
+    section.products .contenedor-lista-productos {
+        max-width: 100% !important;
+    }
+
+    section.products .lista-productos {
+        flex-direction: column !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+    }
+
+    section.products .product-item {
+        flex: 0 0 80% !important;
+        min-width: 80% !important;
+        max-width: 80% !important;
+    }
+
+    section.products .flecha-desplazar {
+        display: none !important;
+    }
+}
