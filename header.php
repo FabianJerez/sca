@@ -21,7 +21,7 @@
     </nav>
 
     <?php if (isset($_SESSION["usuario_id"])): ?>
-        <span>Bienvenido, <?= htmlspecialchars($_SESSION["usuario_nombre"] ?? '') ?></span>
+        <span class="usuario-bienvenida">Bienvenido, <?= htmlspecialchars($_SESSION["usuario_nombre"] ?? '') ?></span>
         <a href="<?= BASE_URL ?>login/logout.php" class="login-btn">SALIR</a>
     <?php else: ?>
         <a href="<?= BASE_URL ?>login/login.php" class="login-btn">INGRESAR</a>

@@ -20,7 +20,7 @@ $subseccion = $_GET['sub'] ?? '';
     <meta charset="UTF-8">
     <title>Panel Principal</title>
     <link rel="stylesheet" href="<?= BASE_URL ?>css/headerfooter.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>css/panel2.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>css/panel_general.css">
 </head>
 <body>
 
@@ -30,24 +30,30 @@ $subseccion = $_GET['sub'] ?? '';
     <!-- Barra lateral -->
     <aside class="sidebar">
         <h3>Panel</h3>
-        <br>
-        <ul>
-            <li><a href="panel.php?seccion=iot">IOT</a></li>
-            <br>
-            <li><a href="panel.php?seccion=mensajes">Mensajes</a></li>
-            <br>
-            <li><a href="panel.php?seccion=newsletter">Newsletter</a></li>
-        </ul>
+        <form method="get" action="panel.php" style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
+            <input type="hidden" name="vista" value="home">
+
+            <button type="submit" name="seccion" value="iot">IOT</button>
+            <button type="submit" name="seccion" value="mensajes">Mensajes</button>
+            <button type="submit" name="seccion" value="newsletter">Newsletter</button>
+        </form>
     </aside>
+
     <div class="panel-body">
         <!-- Barra superior dinámica -->
         <nav class="subnav">
             <?php if ($seccion === 'iot'): ?>
                 <a href="panel.php?seccion=iot&sub=ver">Ver Chips</a>
-                <a href="panel.php?seccion=iot&sub=agregar">Agregar Chip</a>
+                <a href="panel.php?seccion=iot&sub=agregar">Agregar Chip</a>  
+
             <?php elseif ($seccion === 'mensajes'): ?>
-                <a href="panel.php?seccion=mensajes&sub=ver">Ver Mensajes</a>
-                <!-- <a href="panel.php?seccion=mensajes&sub=responder">Responder</a> -->
+                <?php if ($rol === 'admin'): ?>
+                    <a href="panel.php?seccion=mensajes&sub=ver">Ver Mensajes</a>
+                <?php elseif ($rol === 'usuario'): ?>
+                    <a href="panel.php?seccion=mensajes&sub=mis">Mis Mensajes</a>
+                    <a href="panel.php?seccion=mensajes&sub=enviar">Enviar mensaje</a>
+                <?php endif; ?>
+
             <?php elseif ($seccion === 'newsletter'): ?>
                 <?php if ($rol === 'admin'): ?>
                     <a href="panel.php?seccion=newsletter&sub=suscriptos">Ver Clientes</a>
@@ -72,10 +78,24 @@ $subseccion = $_GET['sub'] ?? '';
                 }
             }
             elseif ($seccion === 'mensajes') {
-                if (isset($_GET['id'])) {
-                    include 'mensajes/responder.php';
+                if ($rol === 'admin') {
+                    if ($subseccion === 'ver') {
+                        include 'mensajes/ver_mensajes.php';
+                    } elseif ($subseccion === 'responder' && isset($_GET['id'])) {
+                        include 'mensajes/responder.php';
+                    } else {
+                        echo "<p>Seleccioná una opción de Mensajes desde la barra superior.</p>";
+                    }
+                } elseif ($rol === 'usuario') {
+                    if ($subseccion === 'mis') {
+                        include 'mensajes/mis_mensajes.php';
+                    } elseif ($subseccion === 'enviar') {
+                        include 'mensajes/enviar_mensaje.php';
+                    } else {
+                        echo "<p>Seleccioná una opción de Mensajes desde la barra superior.</p>";
+                    }
                 } else {
-                    include 'mensajes/ver_mensajes.php';
+                    echo "<p>Acceso no autorizado.</p>";
                 }
             }
             elseif ($seccion === 'newsletter') {

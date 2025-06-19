@@ -1,69 +1,42 @@
 <?php
-session_start();
+require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/auth.php';
+requireLogin();
 
-// Si no está logueado, lo mandamos al login
-if (!isset($_SESSION["usuario_id"])) {
-    header("Location: ../login/login.php?redirect=../php/mis_mensajes.php");
-    exit;
-}
-
-$usuario_id = $_SESSION["usuario_id"];
 $usuario_nombre = $_SESSION["usuario_nombre"];
+$email_usuario = $_SESSION["email"];
 
-//conexion a la BD
-require("conexion.php");
-
-// Traemos solo los mensajes del usuario actual
-$stmt = $conexion->prepare("SELECT * FROM mensajes WHERE remitente = ? ORDER BY fecha DESC");
-$stmt->bind_param("s", $usuario_nombre);
-$stmt->execute();
-$resultado = $stmt->get_result();
+// Traemos solo los mensajes del usuario actual (por email)
+$stmt = $conn->prepare("SELECT * FROM mensajes WHERE email = ? ORDER BY fecha DESC");
+$stmt->execute([$email_usuario]);
+$mensajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Mis mensajes</title>
-    <link rel="stylesheet" href="../css/mis_mensajes.css">
-    <link rel="stylesheet" href="../css/headerfooter.css">
-</head>
-<body>
-    <?php include '../header.php'?>
-    
-    <h2>Mis mensajes enviados</h2>
-    <p>Bienvenido, <?php echo htmlspecialchars($usuario_nombre); ?></p>
-    <a href="../contacto.php">Enviar nuevo mensaje</a> | 
-    <a href="../login/logout.php">Cerrar sesión</a>
+<h2>Mis mensajes enviados</h2>
 
-    <table>
-        <tr>
-            <th>Asunto</th>
-            <th>Mensaje</th>
-            <th>Estado</th>
-            <th>Respuesta</th>
-            <th>Fecha</th>           
-        </tr>
+<table border="1" cellpadding="6">
+    <tr>
+        <th>Asunto</th>
+        <th>Mensaje</th>
+        <th>Estado</th>
+        <th>Respuesta</th>
+        <th>Fecha</th>
+    </tr>
 
-        <?php while ($fila = $resultado->fetch_assoc()): ?>
+    <?php if (count($mensajes) > 0): ?>
+        <?php foreach ($mensajes as $fila): ?>
             <tr>
-                <td><?php echo htmlspecialchars($fila['asunto']); ?></td>
-                <td><?php echo nl2br(htmlspecialchars($fila['mensaje'])); ?></td>
-                <td class="<?php echo $fila['estado'] === 'Resuelto' ? 'resuelto' : 'pendiente'; ?>">
-                    <?php echo htmlspecialchars($fila['estado']); ?>
+                <td><?= htmlspecialchars($fila['asunto']) ?></td>
+                <td><?= nl2br(htmlspecialchars($fila['mensaje'])) ?></td>
+                <td class="<?= $fila['estado'] === 'Resuelto' ? 'resuelto' : 'pendiente'; ?>">
+                    <?= htmlspecialchars($fila['estado']) ?>
                 </td>
-                <td><?php echo !empty($fila['respuesta']) ? nl2br(htmlspecialchars($fila['respuesta'])) : 'Sin respuesta'; ?></td>
-                <td><?php echo $fila['fecha']; ?></td>
+                <td><?= !empty($fila['respuesta']) ? nl2br(htmlspecialchars($fila['respuesta'])) : 'Sin respuesta' ?></td>
+                <td><?= date("d/m/Y H:i", strtotime($fila['fecha'])) ?></td>
             </tr>
-        <?php endwhile; ?>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <tr><td colspan="5">No enviaste mensajes aún.</td></tr>
+    <?php endif; ?>
+</table>
 
-    </table><br><br>
-
-    <!-- <?php include '../footer.php'?> -->
-</body>
-</html>
-
-<?php
-$stmt->close();
-$conexion->close();
-?>

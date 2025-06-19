@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../../includes/auth.php';
 
 // Configuración segura para PHPMailer
-define('GMAIL_USER', 'likid88@gmail.com');          //cuenta de Gmail del Administrador
-define('GMAIL_APP_PASSWORD', 'ndiomheaxfjhbpxb');   // Contraseña de aplicación generada en Google
-define('NEWSLETTER_BASE_URL', 'http://localhost/ifts4/newsletter/');//agregar la URL del IFTS 4
+define('GMAIL_USER', 'likid88@gmail.com');          // Cuenta de Gmail del administrador
+define('GMAIL_APP_PASSWORD', 'jyeymnphariktzjp');   // Contraseña de aplicación generada en Google
+define('NEWSLETTER_BASE_URL', 'http://localhost/sca/newsletter/'); // URL base correcta del proyecto SCA
 ?>

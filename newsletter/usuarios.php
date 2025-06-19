@@ -12,6 +12,13 @@ requireLogin();
 if (getUserRole() !== 'admin') {
     exit("Acceso denegado.");
 }
+if (isset($_GET['limpiar'])) {
+    header("Location: ?seccion=newsletter&sub=suscriptos");
+    exit;
+}
+
+// --- Mensajes ---
+$msg = $_GET['msg'] ?? null;
 
 // --- Búsqueda ---
 $campo = $_GET['campo'] ?? 'nombre_completo';
@@ -45,7 +52,11 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <h2>Listado de suscripciones al newsletter</h2>
 
-<form method="GET" action="../panel.php" style="margin-bottom: 15px;">
+<?php if ($msg): ?>
+    <p style="color: green;"><strong><?= htmlspecialchars($msg) ?></strong></p>
+<?php endif; ?>
+
+<form method="GET" action="" style="margin-bottom: 15px;">
     <input type="hidden" name="seccion" value="newsletter">
     <input type="hidden" name="sub" value="suscriptos">
 
@@ -58,8 +69,9 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <input type="text" name="buscar" value="<?= htmlspecialchars($buscar) ?>" placeholder="Buscar..." required>
     <button type="submit">Buscar</button>
 
-    <a href="../panel.php?seccion=newsletter&sub=suscriptos">Limpiar</a>
+    <button type="submit" name="limpiar" value="1">Limpiar</button>
 </form>
+
 
 <table border="1" cellpadding="5">
     <tr>
@@ -78,11 +90,14 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <td><?= $u['activo'] ? 'Activo' : 'Inactivo' ?></td>
             <td>
                 <?php if ($u['activo']) : ?>
-                    <a href="dar_baja_newsletter.php?id=<?= $u['id'] ?>" onclick="return confirm('¿Dar de baja a este usuario del newsletter?')">Desuscribir</a>
+                    <a href="newsletter/dar_baja_newsletter.php?id=<?= $u['id'] ?>&msg=Usuario+desuscripto+correctamente"
+                       onclick="return confirm('¿Dar de baja a este usuario del newsletter?')">Desuscribir</a>
                 <?php else : ?>
-                    <a href="dar_alta_newsletter.php?id=<?= $u['id'] ?>" onclick="return confirm('¿Reactivar la suscripción al newsletter?')">Suscribir</a>
+                    <a href="newsletter/dar_alta_newsletter.php?id=<?= $u['id'] ?>&msg=Usuario+suscripto+correctamente"
+                       onclick="return confirm('¿Reactivar la suscripción al newsletter?')">Suscribir</a>
                 <?php endif; ?>
             </td>
         </tr>
     <?php endforeach; ?>
 </table>
+

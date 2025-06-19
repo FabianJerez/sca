@@ -65,8 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $mail->clearAllRecipients();
                 $mail->addAddress($d['email']);
 
-                $enlaceBaja = BASE_URL . "newsletter/newsletter_unsuscribe.php?token=" . urlencode($d['token']);
-                $mail->Body = nl2br($mensaje) . "<hr><p style='font-size: small;'>Si no querés recibir más correos, podés <a href='$enlaceBaja'>desuscribirte aquí</a>.<br><br>Atte. Equipo SCA</p>";
+                $enlaceBaja = BASE_URL . "newsletter_unsuscribe.php?token=" . urlencode($d['token']);
+                $mail->Body = nl2br($mensaje) . "<hr><p style='font-size: small;'>Si no queres recibir mas correos, podes <a href='$enlaceBaja'>desuscribirte aqui</a>.<br><br>Atte. Equipo SCA</p>";
 
                 $mail->send();
             }

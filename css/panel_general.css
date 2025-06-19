@@ -1,0 +1,77 @@
+.panel-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar a la izquierda */
+.sidebar {
+    width: 200px;
+    background-color: #f4f4f4;
+    padding: 1rem;
+}
+
+/* Todo lo que no es la sidebar */
+.panel-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Subnav arriba del contenido, después del header */
+.subnav {
+    background-color: #e0e0e0;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.subnav a {
+    margin-right: 15px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Contenido principal debajo de la subnav */
+.panel-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+}
+.sidebar form button {
+    background-color: #1a3c34;
+    color: white;
+    border: none;
+    padding: 10px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar form button:hover {
+    background-color: #2e695c;
+}
+.subnav {
+    background-color: #f5f5f5;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.subnav a {
+    text-decoration: none;
+    color: #333;
+    padding: 8px 15px;
+    border-radius: 5px;
+    background-color: #e0e0e0;
+    transition: background-color 0.2s ease;
+}
+
+.subnav a:hover {
+    background-color: #d0d0d0;
+}
+
