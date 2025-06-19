@@ -1,25 +1,40 @@
 <?php
-    if (session_status() === PHP_SESSION_NONE) {
-    session_start(); // Asegura que no haya múltiples session_start()
-    }
-    // Verificar si el usuario está autenticado
-    if (!isset($_SESSION["usuario_id"])) {
-        header("Location: ../login/login.php");
-        exit();
+session_start();
+// Verificar si el usuario está autenticado
+if (!isset($_SESSION["usuario_id"])) {
+    header("Location: ../login/login.php");
+    exit();
+}
+
+include("../conection/conexion.php");
+
+// Obtener chipid seleccionado (si existe)
+$chipid = isset($_GET['chipid']) && $_GET['chipid'] !== '' ? filter_var($_GET['chipid'], FILTER_SANITIZE_STRING) : null;
+
+// Obtener el último registro para los indicadores
+try {
+    if ($chipid) {
+        $sql = "SELECT temperatura, humedad FROM datos_recibe WHERE chipid = :chipid ORDER BY fecha DESC LIMIT 1";
+        $resultado = $base->prepare($sql);
+        $resultado->execute([':chipid' => $chipid]);
+        $ultimo_registro = $resultado->fetch(PDO::FETCH_ASSOC);
+    }else{
+        echo "Aun no selecciono un CHIP ID";
     }
 
-    require_once __DIR__ . '/../config.php';
-    require_once __DIR__ . '/../includes/db.php';
-
+    if ($ultimo_registro) {
+        $temperatura = $ultimo_registro['temperatura'];
+        $humedad = $ultimo_registro['humedad'];
+    } else {
+        $temperatura = "No hay datos";
+        $humedad = "No hay datos";
+    }
     
-    $sql = "SELECT * FROM datos_recibe ORDER BY fecha DESC LIMIT 3";
-    $resultado = $conn->prepare($sql);
-    $resultado->execute(array());
-
-    foreach($resultado as $fila):
-        $temperatura = $fila['temperatura']; 
-        $humedad = $fila['humedad'];
-    endforeach
+} catch (PDOException $e) {
+    $temperatura = 0;
+    $humedad = 0;
+    $error = "Error al consultar ultimo datos_recibe: " . htmlspecialchars($e->getMessage());
+}
 ?>
 
 <!DOCTYPE html>
@@ -28,116 +43,153 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloud IOT USUARIO</title>
+    <title>Cloud IOT - Panel de Usuario</title>
     <link rel="stylesheet" href="../css/headerfooter.css">
     <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/panel.css">
+    <link rel="stylesheet" href="../css/panel_usuario.css">
 </head>
 <body>
-    <?php include __DIR__ . '/../header.php'; ?>
-    
+    <?php include 'headerpanel.php'; ?>
+
+    <nav class="navbar">
+        <h1>Bienvenido Usuario: <?php echo htmlspecialchars($_SESSION["usu"]); ?></h1>
+    </nav>
+
     <div class="container">
-        <section class="s1">Valores Actuales          
+        <section class="s1">
+            <h2>Ultimos Valores</h2>
+            
             <div class="containergrafico">
                 <div class="gaugegrafico">
-                    <h2>Temperatura (°C)</h2>
+                    <h3>Temperatura (°C)</h3>
+                    
                     <canvas id="tempGauge" width="200" height="200"></canvas>
-                    <p id="tempValue"><?php echo $temperatura; ?> °C</p>
+                    <p id="tempValue"><?php echo htmlspecialchars($temperatura); ?> °C</p>
                 </div>
                 <div class="gaugegrafico">
-                    <h2>Humedad (%)</h2>
+                    <h3>Humedad (%)</h3>
+                    
                     <canvas id="humGauge" width="200" height="200"></canvas>
-                    <p id="humValue"><?php echo $humedad; ?> %</p>
+                    <p id="humValue"><?php echo htmlspecialchars($humedad); ?> %</p>
                 </div>
             </div>
         </section>
-        
-        <section class="s2">           
-           <h1>DATOS RECIBE Prueba DATABASE</h1>
-           <?php
-                // esto funionaba
-                $sql = "SELECT * FROM datos_recibe ORDER BY fecha DESC LIMIT 10";
-                $resultado = $conn->prepare($sql);
-                $resultado->execute(array());
-                $chip = 112;
-               
-                //$sql = "SELECT * FROM datos_recibe ORDER BY fecha DESC LIMIT 10 WHERE chipid = :chip";
-                //$resultado = $base->prepare($sql);
-                //$resultado->execute([':chip' => $chip]);
-                
+
+        <section class="s2">
+            <h2>Datos Recientes (Últimos 20)</h2>
+            
+            <?php
+            try {
+                if ($chipid) {
+                    echo "Datos del CHIP ID = " . $chipid;
+                    
+                    $sql = "SELECT id, chipid, fecha, temperatura, humedad FROM datos_recibe WHERE chipid = :chipid ORDER BY fecha DESC LIMIT 20";
+                    $resultado = $base->prepare($sql);
+                    $resultado->execute([':chipid' => $chipid]);
+                    $datos = $resultado->fetchAll(PDO::FETCH_ASSOC);
+                }else{
+                    echo "Aun no selecciono un CHIP ID";
+                }
             ?>
-        
-            <table style="width:50%; border:4px solid red; align: center;">
+            <table>
                 <tr>
                     <th>ID</th>
                     <th>CHIPID</th>
-                    <th>RESGISTRADO</th>
+                    <th>FECHA</th>
                     <th>TEMPERATURA</th>
                     <th>HUMEDAD</th>
                 </tr>
-                <?php
-                    foreach($resultado as $fila):
-                ?>    
-                <tr>
-                    <td><?php echo $fila['id']; ?></td>
-                    <td><?php echo $fila['chipid']; ?></td>
-                    <td><?php echo $fila['fecha']; ?></td>
-                    <td><?php echo $fila['temperatura']; ?></td>
-                    <td><?php echo $fila['humedad']; ?></td>
-                </tr> 
-                <?php
-                    endforeach;
-                ?>
+                <?php if (empty($datos)): ?>
+                    <tr><td colspan="5">No hay datos disponibles.</td></tr>
+                <?php else: ?>
+                    <?php foreach ($datos as $fila): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($fila['id']); ?></td>
+                            <td><?php echo htmlspecialchars($fila['chipid']); ?></td>
+                            <td><?php echo htmlspecialchars($fila['fecha']); ?></td>
+                            <td><?php echo htmlspecialchars($fila['temperatura']); ?> °C</td>
+                            <td><?php echo htmlspecialchars($fila['humedad']); ?> %</td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </table>
-            
-        </section>
-        
-        
-        <section class="s3">Seccion 3            
-            <section class="iot">
-         <div>       
-            <a href=".\iot\chipid_salidas_formulario.html" class="login-btn">Manejar Salidas</a>
-        </div>
-        <div>       
-            <a href=".\mensajes\mis_mensajes.php" class="login-btn">Mensajeria</a>
-        </div>
-        
-        <div>       
-            
-           
-    </section>
-        </section>
-        
-        <section class="s4">          
-            <h1>CHIPID VER DATABASE</h1>
             <?php
-              
-                $usuario = $_SESSION["usu"];
-                $sql = "SELECT * FROM chipids WHERE usuario = :usuario";
-                $resultado = $conn->prepare($sql);
-                $resultado->execute([':usuario' => $usuario]);
-            ?> 
+            } catch (PDOException $e) {
+                echo "<p class='error'>Error al consultar datos_recibe: " . htmlspecialchars($e->getMessage()) . "</p>";
+            }
+            ?>
+        </section>
+
+        <section class="s3">
+            <h2>Funciones</h2>
             
-            <table style = "width:50%; border:4px solid red; align: center;">
+            <div class="actions">
+                <a href="<?php echo $chipid ? '../iot/chipid_modificar_salidas.php?chipid=' . urlencode($chipid) : '#'; ?>" 
+                   class="action-btn" 
+                   
+                <?php echo !$chipid ? 'onclick="alert(\'Por favor, selecciona un ChipID primero.\'); return false;"' : ''; ?>>Manejar Salidas</a>
+                
+                <a href="../mensajes/ver_mensajes.php" class="action-btn">Bandeja de Mensajería</a>
+                
+                <a href="../newsletter/formulario_suscripcion.php" class="action-btn">Suscribir al Newsletter</a>
+                
+                <a href="../newsletter/formulario_dar_baja_suscripcion.php" class="action-btn">Baja del Newsletter</a>
+                
+                </div>
+        </section>
+
+        <section class="s4">
+            <h2>Chips Asociados</h2>
+            
+            <?php
+            try {
+                $usuario = $_SESSION["usu"];
+                
+                $sql = "SELECT id, usuario, descripcion, chipid FROM chipids WHERE usuario = :usuario";
+                $resultado = $base->prepare($sql);
+                $resultado->execute([':usuario' => $usuario]);
+                
+                $chips = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            ?>
+            
+            <form method="get" class="filter-form">
+                <label for="chipid">Seleccionar ChipID:</label>
+                
+                <select name="chipid" id="chipid">
+                    <option value="">Todos</option>
+                    <?php foreach ($chips as $chip): ?>
+                        <option value="<?php echo htmlspecialchars($chip['chipid']); ?>" <?php echo $chipid === (string)$chip['chipid'] ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($chip['descripcion'] . ' (' . $chip['chipid'] . ')'); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                <button type="submit">Filtrar</button>
+            </form>
+            <table>
                 <tr>
                     <th>ID</th>
                     <th>USUARIO</th>
-                    <th>DESCRIPCION</th>
+                    <th>DESCRIPCIÓN</th>
                     <th>CHIPID</th>
                 </tr>
-                <?php
-                    foreach($resultado as $fila):
-                ?>    
-                <tr>
-                   <td><?php echo  $fila['id'] ;  ?>            </td>
-                   <td><?php echo  $fila['usuario'];   ?>       </td>
-                   <td><?php echo  $fila['descripcion'];   ?>   </td>
-                   <td><?php echo  $fila['chipid'];   ?>   </td>
-                </tr> 
-                <?php
-                    endforeach;
-                ?>
-            </table> 
+                <?php if (empty($chips)): ?>
+                    <tr><td colspan="4">No hay chips asociados.</td></tr>
+                <?php else: ?>
+                    <?php foreach ($chips as $fila): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($fila['id']); ?></td>
+                            <td><?php echo htmlspecialchars($fila['usuario']); ?></td>
+                            <td><?php echo htmlspecialchars($fila['descripcion']); ?></td>
+                            <td><?php echo htmlspecialchars($fila['chipid']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </table>
+            <?php
+            } catch (PDOException $e) {
+                echo "<p class='error'>Error al consultar chipids: " . htmlspecialchars($e->getMessage()) . "</p>";
+            }
+            ?>
         </section>
     </div>
 
@@ -149,30 +201,26 @@
             const centerY = canvas.height / 2;
             const radius = canvas.width / 2 - 20;
 
-            // Fondo del indicador
             ctx.beginPath();
             ctx.arc(centerX, centerY, radius, Math.PI, 2 * Math.PI, false);
             ctx.lineWidth = 20;
             ctx.strokeStyle = '#ddd';
             ctx.stroke();
 
-            // Arco de progreso
             const progress = (value / maxValue) * Math.PI;
             ctx.beginPath();
             ctx.arc(centerX, centerY, radius, Math.PI, Math.PI + progress, false);
             ctx.strokeStyle = canvasId === 'tempGauge' ? '#ff4d4d' : '#4d79ff';
             ctx.stroke();
 
-            // Texto en el centro
             ctx.font = '20px Arial';
             ctx.fillStyle = '#333';
             ctx.textAlign = 'center';
             ctx.fillText(label, centerX, centerY + 50);
         }
-        // Dibujar indicadores
-        drawGauge('tempGauge', <?php echo $temperatura; ?>, 50, '°C', 'Temperatura');
-        drawGauge('humGauge', <?php echo $humedad; ?>, 100, '%', 'Humedad');
-    </script>
 
+        drawGauge('tempGauge', <?php echo json_encode($temperatura); ?>, 50, '°C', 'Temperatura');
+        drawGauge('humGauge', <?php echo json_encode($humedad); ?>, 100, '%', 'Humedad');
+    </script>
 </body>
 </html>

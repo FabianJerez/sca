@@ -7,7 +7,7 @@
         <nav>
             <ul>
                 <li><a href="../index.php">VOLVER INICIO</a></li>
-                <li><a href="email\envioprueba1.php">EMAIL 1</a></li>
+                <!--<li><a href="email\envioprueba1.php">EMAIL 1</a></li>-->
             </ul>
         </nav>
     
