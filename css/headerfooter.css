@@ -31,6 +31,13 @@ header {
   display: block;
 }
 
+.usuario-bienvenida {
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
 /* Estilos para el menú de navegación */
 nav ul {
   list-style: none;
@@ -262,9 +269,9 @@ footer {
     align-items: center;
   }
 
-  .footer-section {
+  /* .footer-section {
     margin: 0.8rem 0;
-  }
+  } */
 
   .newsletter input[type="email"],
   .newsletter button[type="submit"] {

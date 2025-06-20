@@ -26,9 +26,9 @@
         </div>
     </div>
     <div class="social-icons">
-        <a href="#"><img src="./img/facebook.svg" alt="Facebook"></a>
-        <a href="#"><img src="./img/instagram.svg" alt="Instagram"></a>
-        <a href="#"><img src="./img/whatsapp.svg" alt="WhatsApp"></a>
+        <a href="#"><img src="<?= BASE_URL ?>img/facebook.svg" alt="Facebook"></a>
+        <a href="#"><img src="<?= BASE_URL ?>img/instagram.svg" alt="Instagram"></a>
+        <a href="#"><img src="<?= BASE_URL ?>img/whatsapp.svg" alt="WhatsApp"></a>
     </div>
     <div class="copyright">
         <p>© 2025 SCA Automatizaciones. Todos los derechos reservados.</p>

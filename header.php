@@ -5,10 +5,12 @@
     }
     require_once __DIR__ . '/config.php';
     ?>
-
     <div class="logo">
-        <a href="../index.php"><img src="../img/logo33.png" alt="Logo ScaSoftware"></a>
+        <a href="<?= BASE_URL ?>index.php"><img src="<?= BASE_URL ?>img/logo33.png" alt="Logo ScaSoftware"></a>
     </div>
+    <?php if (isset($_SESSION["usuario_id"])): ?>
+        <span class="usuario-bienvenida">Bienvenido, <?= htmlspecialchars($_SESSION["usuario_nombre"] ?? '') ?></span>
+    <?php endif; ?>
     <button class="hamburger" aria-label="Alternar menú">☰</button>
     <nav>
         <ul>
@@ -26,9 +28,7 @@
             <?php endif; ?>
         </ul>
     </nav>
-
     <?php if (isset($_SESSION["usuario_id"])): ?>
-        <span class="usuario-bienvenida">Bienvenido, <?= htmlspecialchars($_SESSION["usuario_nombre"] ?? '') ?></span>
         <a href="<?= BASE_URL ?>login/logout.php" class="login-btn">SALIR</a>
     <?php else: ?>
         <a href="<?= BASE_URL ?>login/login.php" class="login-btn">INGRESAR</a>

@@ -129,7 +129,7 @@ try {
                    
                 <?php echo !$chipid ? 'onclick="alert(\'Por favor, selecciona un ChipID primero.\'); return false;"' : ''; ?>>Manejar Salidas</a>
                 
-                <a href="../mensajes/ver_mensajes.php" class="action-btn">Bandeja de Mensajería</a>
+                <a href="../mensajes/mis_mensajes.php" class="action-btn">Bandeja de Mensajería</a>
                 
                 <a href="../newsletter/formulario_suscripcion.php" class="action-btn">Suscribir al Newsletter</a>
                 

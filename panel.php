@@ -52,7 +52,10 @@ $subseccion = $_GET['sub'] ?? '';
                     <a href="panel.php?seccion=iot&sub=ultimos">Ultimos Registros Recibidos</a>
                     <a href="panel.php?seccion=iot&sub=chips">CHIPIDs Registrados</a>
                 <?php elseif ($rol === 'usuario'): ?>
-                    <a href="panel.php?seccion=iot&sub=chips">CHIPIDs Registrados</a>
+                        <a href="panel.php?seccion=iot&sub=valores">Valores actuales</a> |
+                        <a href="panel.php?seccion=iot&sub=recientes">Últimos registros</a> |
+                        <a href="panel.php?seccion=iot&sub=salidas">Manejar salidas</a> |
+                        <a href="panel.php?seccion=iot&sub=chips">Chips registrados</a>
                 <?php endif; ?>
 
             <?php elseif ($seccion === 'mensajes'): ?>
@@ -78,7 +81,7 @@ $subseccion = $_GET['sub'] ?? '';
         <main class="panel-content">
             <?php
             if ($seccion === 'iot') {
-                
+                if ($rol === 'admin') {
                     if ($subseccion === 'valores') {
                         include __DIR__ . '/iot/valores_actuales.php';
                     } elseif ($subseccion === 'ultimos') {
@@ -88,6 +91,21 @@ $subseccion = $_GET['sub'] ?? '';
                     } else {
                         echo "<p>Seleccioná una opción de IOT.</p>";
                     }
+                }elseif ($rol === 'usuario') {
+                    if ($subseccion === 'valores') {
+                        include __DIR__ . '/iot/usuario_valores.php';
+                    } elseif ($subseccion === 'recientes') {
+                        include __DIR__ . '/iot/usuario_recientes.php';
+                    } elseif ($subseccion === 'salidas') {
+                        include __DIR__ . '/iot/usuario_salidas.php';
+                    } elseif ($subseccion === 'chips') {
+                        include __DIR__ . '/iot/usuario_chips.php';
+                    } else {
+                        echo "<p>Seleccioná una opción de IOT.</p>";
+                    }
+                } else {
+                    echo "<p>Acceso no autorizado.</p>";
+                }
             }
             elseif ($seccion === 'mensajes') {
                 if ($rol === 'admin') {

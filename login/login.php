@@ -33,10 +33,10 @@ $redirect = $_POST["redirect"] ?? $_GET["redirect"] ?? '';
         <form class="login-form" method="post" action="consulta.php">
             <input type="hidden" name="redirect" value="<?= htmlspecialchars($redirect); ?>">
 
-            <label>Usuario:</label><br>
+            <label>Usuario:</label>
             <input type="text" name="usuario" required autocomplete="off"><br><br>
 
-            <label>Contraseña:</label><br>
+            <label>Contraseña:</label>
             <input type="password" name="password" required><br><br>
 
             <button type="submit">Ingresar</button>
