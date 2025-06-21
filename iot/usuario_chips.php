@@ -14,7 +14,7 @@ if ($usuario) {
         $sql = "SELECT id, usuario, descripcion, chipid 
                 FROM chipids 
                 WHERE usuario = :usuario";
-        $stmt = $base->prepare($sql);
+        $stmt = $conn->prepare($sql);
         $stmt->execute([':usuario' => $usuario]);
         $chips = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {

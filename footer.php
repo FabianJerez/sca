@@ -18,7 +18,7 @@
         <div class="footer-section newsletter">
             <h3>NEWSLETTER</h3>
             <p>Mantenete actualizado de nuestras novedades y ofertas especiales del mes!!!</p>
-            <form id="newsletterForm" action="/newsletter/formulario.php" method="post" onsubmit="return validateEmail()">
+            <form id="newsletterForm" action="<?= BASE_URL ?>newsletter/suscripcion.php" method="post" onsubmit="return validateEmail()">
                 <input type="email" id="emailInput" name="email" placeholder="Dirección de E-Mail" required>
                 <p id="errorMessage" class="error-message">El email debe contener @ y .</p>
                 <button type="submit" name="suscribe" value="suscribe">Suscribirme al Newsletter</button>
