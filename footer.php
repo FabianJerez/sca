@@ -1,3 +1,9 @@
+<?php
+if (!defined('BASE_URL')) {
+    require_once __DIR__ . '/../config.php'; // Ajustá la ruta si es necesario
+}
+?>
+
 <footer>
     <script src="js/scripts.js"></script>
     <div class="footer-container">
